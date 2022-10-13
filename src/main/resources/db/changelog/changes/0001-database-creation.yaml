@@ -1,0 +1,417 @@
+databaseChangeLog:
+- changeSet:
+    id: 1665638777785-1
+    author: ceqs (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id_esp
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: descripcion
+            type: VARCHAR(45)
+        tableName: especialidades
+- changeSet:
+    id: 1665638777785-2
+    author: ceqs (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id_horario
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: id_medico
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: fecha
+            type: date
+        - column:
+            constraints:
+              nullable: false
+            name: hora_inicio
+            type: datetime
+        - column:
+            constraints:
+              nullable: false
+            name: hora_fin
+            type: datetime
+        - column:
+            constraints:
+              nullable: false
+            name: estado
+            type: VARCHAR(50)
+        tableName: horarios
+- changeSet:
+    id: 1665638777785-3
+    author: ceqs (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id_medico
+            type: INT
+        - column:
+            name: apellidos
+            type: VARCHAR(45)
+        - column:
+            constraints:
+              nullable: false
+            name: nombres
+            type: VARCHAR(45)
+        - column:
+            constraints:
+              nullable: false
+            name: sexo
+            type: VARCHAR(1)
+        - column:
+            name: fec_nac
+            type: date
+        - column:
+            name: dni
+            type: VARCHAR(8)
+        - column:
+            name: telefono
+            type: VARCHAR(20)
+        - column:
+            name: email
+            type: VARCHAR(60)
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id_esp
+            type: INT
+        tableName: medicos
+- changeSet:
+    id: 1665638777785-4
+    author: ceqs (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id_paciente
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: tipo_doc
+            type: CHAR(1)
+        - column:
+            constraints:
+              nullable: false
+            name: num_doc
+            type: CHAR(50)
+        - column:
+            name: ape_paterno
+            type: VARCHAR(50)
+        - column:
+            name: ape_materno
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            name: nombres
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            name: telefono
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            name: celular
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            name: email
+            type: VARCHAR(60)
+        - column:
+            name: fec_nac
+            type: date
+        - column:
+            constraints:
+              nullable: false
+            name: sexo
+            type: VARCHAR(1)
+        - column:
+            constraints:
+              nullable: false
+            name: usuario
+            type: VARCHAR(50)
+        tableName: pacientes
+- changeSet:
+    id: 1665638777785-5
+    author: ceqs (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id_cita
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: id_paciente
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: id_medico
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: fh_inicio
+            type: datetime
+        - column:
+            constraints:
+              nullable: false
+            name: fh_fin
+            type: datetime
+        - column:
+            constraints:
+              nullable: false
+            name: fecha_cita
+            type: date
+        - column:
+            constraints:
+              nullable: false
+            defaultValue: PRESENCIAL
+            name: tipo_cita
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            defaultValue: EPS
+            name: tipo_seguro
+            type: VARCHAR(50)
+        tableName: reserva
+- changeSet:
+    id: 1665638777785-6
+    author: ceqs (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id_rol
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            name: nombre
+            type: VARCHAR(128)
+        - column:
+            name: descripcion
+            type: VARCHAR(255)
+        tableName: roles
+- changeSet:
+    id: 1665638777785-7
+    author: ceqs (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: usuario
+            type: VARCHAR(50)
+        - column:
+            constraints:
+              nullable: false
+            name: password
+            type: VARCHAR(128)
+        - column:
+            constraints:
+              nullable: false
+            name: id_rol
+            type: VARCHAR(50)
+        - column:
+            defaultValueBoolean: true
+            name: enabled
+            type: BIT(1)
+        tableName: usuarios
+- changeSet:
+    id: 1665638777785-8
+    author: ceqs (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: id_esp
+        indexName: fk_Medicos_Especialidades1_idx
+        tableName: medicos
+- changeSet:
+    id: 1665638777785-9
+    author: ceqs (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: id_medico
+        indexName: fk_cita_medico
+        tableName: reserva
+- changeSet:
+    id: 1665638777785-10
+    author: ceqs (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: id_paciente
+        indexName: fk_cita_paciente
+        tableName: reserva
+- changeSet:
+    id: 1665638777785-11
+    author: ceqs (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: id_medico
+        indexName: fk_horario_medico
+        tableName: horarios
+- changeSet:
+    id: 1665638777785-12
+    author: ceqs (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: usuario
+        indexName: fk_paciente_usuario_idx
+        tableName: pacientes
+- changeSet:
+    id: 1665638777785-13
+    author: ceqs (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: id_rol
+        indexName: fk_usuario_rol_idx
+        tableName: usuarios
+- changeSet:
+    id: 1665638777785-14
+    author: ceqs (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_esp
+        baseTableName: medicos
+        constraintName: fk_Medicos_Especialidades1
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id_esp
+        referencedTableName: especialidades
+        validate: true
+- changeSet:
+    id: 1665638777785-15
+    author: ceqs (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_medico
+        baseTableName: reserva
+        constraintName: fk_cita_medico
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id_medico
+        referencedTableName: medicos
+        validate: true
+- changeSet:
+    id: 1665638777785-16
+    author: ceqs (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_paciente
+        baseTableName: reserva
+        constraintName: fk_cita_paciente
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id_paciente
+        referencedTableName: pacientes
+        validate: true
+- changeSet:
+    id: 1665638777785-17
+    author: ceqs (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_medico
+        baseTableName: horarios
+        constraintName: fk_horario_medico
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id_medico
+        referencedTableName: medicos
+        validate: true
+- changeSet:
+    id: 1665638777785-18
+    author: ceqs (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: usuario
+        baseTableName: pacientes
+        constraintName: fk_paciente_usuario
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: usuario
+        referencedTableName: usuarios
+        validate: true
+- changeSet:
+    id: 1665638777785-19
+    author: ceqs (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id_rol
+        baseTableName: usuarios
+        constraintName: fk_usuario_rol
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id_rol
+        referencedTableName: roles
+        validate: true
+
