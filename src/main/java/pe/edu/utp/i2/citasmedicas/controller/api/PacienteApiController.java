@@ -1,4 +1,4 @@
-package pe.edu.utp.i2.citasmedicas.controller;
+package pe.edu.utp.i2.citasmedicas.controller.api;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import pe.edu.utp.i2.citasmedicas.model.Paciente;
 import pe.edu.utp.i2.citasmedicas.service.api.PacienteServiceAPI;
 
 @RestController
-@RequestMapping(value = "/api/v1/")
+@RequestMapping(value = "/api/v1/pacientes")
 @CrossOrigin("*")
-public class PacienteRestController {
+public class PacienteApiController {
 
 	@Autowired
 	private PacienteServiceAPI pacienteServiceAPI;
