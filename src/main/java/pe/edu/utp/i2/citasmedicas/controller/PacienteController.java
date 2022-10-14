@@ -1,6 +1,8 @@
 package pe.edu.utp.i2.citasmedicas.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,16 +14,24 @@ import pe.edu.utp.i2.citasmedicas.model.Paciente;
 import pe.edu.utp.i2.citasmedicas.service.api.PacienteServiceAPI;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/paciente")
 public class PacienteController {
 
 	@Autowired
 	private PacienteServiceAPI pacienteServiceAPI;
 
-	@RequestMapping("/")
+	@RequestMapping("/grid")
 	public String index(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth != null) {
+			System.out.println(auth.getAuthorities());
+			System.out.println(auth.getCredentials());
+			System.out.println(auth.getDetails());
+			System.out.println(auth.getPrincipal());
+			System.out.println(auth.getName());
+		}
 		model.addAttribute("list", pacienteServiceAPI.getAll());
-		return "index";
+		return "gridpaciente";
 	}
 
 	@GetMapping("/create")

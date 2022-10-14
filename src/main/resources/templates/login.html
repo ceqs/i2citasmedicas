@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Iniciar sesión</title>
-
-<!-- Bootstrap CSS -->
-<link href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-<link href="../static/css/citasmedicas.css" rel="stylesheet" th:href="@{/css/citasmedicas.css}">
+	<meta charset="UTF-8">
+	<title>Iniciar sesión</title>
+	<link href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	<link href="../static/css/login.css" rel="stylesheet" th:href="@{/css/login.css}">
+	<script src="../static/js/bootstrap.min.js" crossorigin="anonymous" th:src="@{/js/bootstrap.min.js}"></script>
+	<script src="../static/js/bootstrap.bundle.min.js" crossorigin="anonymous" th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </head>
 <body>
-	<div class="container">
-		<div class="alert alert-danger" th:if="${param.error}">Nombre de usuario o contraseña incorrectos.</div>
-		<div class="alert alert-success" th:if="${param.logout}">Sesión cerrada correctamente.</div>
+	<div class="alert alert-danger alert-dismissible fade show" th:if="${param.error}">
+		Nombre de usuario o contraseña incorrectos.
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	<div class="alert alert-success alert-dismissible fade show" th:if="${param.logout}">
+		Sesión cerrada correctamente.
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	</div>
 
 	<section class="vh-100">
