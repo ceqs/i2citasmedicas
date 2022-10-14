@@ -36,10 +36,10 @@
                     <a href="#adminSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Administración</a>
                     <ul class="collapse list-unstyled" id="adminSubmenu" data-bs-target="#adminSubmenu">
                         <li>
-                            <a class="menu-options" href="pagEspecialidad.jsp">Especialidad</a>
+                            <a class="menu-options" th:href="@{/especialidades}">Especialidad</a>
                         </li>
                         <li>
-                            <a class="menu-options" href="pagMedico.jsp">Medicos</a>
+                            <a class="menu-options" th:href="@{/medicos}">Medicos</a>
                         </li>
                     </ul>
                 </li>
@@ -48,10 +48,10 @@
 					<a href="#seguridadSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Seguridad</a>
 					<ul class="collapse list-unstyled" id="seguridadSubmenu" data-bs-target="#seguridadSubmenu">
 						<li>
-							<a class="menu-options" href="Roles.jsp">Roles</a>
+							<a class="menu-options" th:href="@{/roles}">Roles</a>
 						</li>
 						<li>
-							<a class="menu-options" href="Usuario.jsp">Usuarios</a>
+							<a class="menu-options" th:href="@{/usuarios}">Usuarios</a>
 						</li>
 					</ul>
 				</li>
@@ -100,7 +100,7 @@
 			event.preventDefault();
 			var href = $(this).attr('href');
 			$.get(href, function( data ) {
-				data = data.replace('https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css', '')
+				data = data.replace('/css/bootstrap.min.css', '')
 				$('#content-options').html( data );
 			});
 		});
