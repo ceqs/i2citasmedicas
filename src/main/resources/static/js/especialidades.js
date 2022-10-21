@@ -1,11 +1,21 @@
 $(document).ready(function () {
 
     $("#btnGuardar_esp").click(function () {
-        $.post("especialidad", $("#form_esp").serialize(), function (response) {
+        var especialidad = {
+            descripcion:$("#txtnombre_esp").val()
+        };
+
+        $.ajax({
+          url:"/v1/especialidades",
+          type:"POST",
+          data:JSON.stringify(especialidad),
+          contentType:"application/json; charset=utf-8",
+          dataType:"json",
+          success: function(){
             $('#modalInfo_esp_moved').modal('hide');
             getDataListado();
+          }
         });
-
     });
 
     setTypeDataTableMaestra();
@@ -66,10 +76,8 @@ function delData(_id) {
 
 
 function getDataListado() {
-    //JSON.parse(response
-    opc = "0";
-    $.post("especialidad", {opc}, function (response) {
-        var lista = $.parseJSON(response);
+    $.getJSON("/v1/especialidades", function (lista) {
+        //var lista = $.parseJSON(response);
 
         var resultado = "";
         tablaMaestra.destroy();
@@ -79,10 +87,10 @@ function getDataListado() {
             resultado = "";
             resultado += "<tr>";
             resultado += "    <td>" + i + "</td>";
-            resultado += "    <td>" + lista[i].idEspecialidad + "</td>";
-            resultado += "    <td>" + lista[i].nomEspecialidad + "</td> ";
-            resultado += "    <td><a href='#' onclick='editar(" + lista[i].idEspecialidad + ")'><img src='botones/Edit.gif'/></a></td>";
-            resultado += "    <td><a href='#' onclick='borrar(" + lista[i].idEspecialidad + ")'><img src='botones/eliminar.png'/></a></td>";
+            resultado += "    <td>" + lista[i].id + "</td>";
+            resultado += "    <td>" + lista[i].descripcion + "</td> ";
+            resultado += "    <td><a href='#' onclick='editar(" + lista[i].id + ")'><img src='botones/Edit.gif'/></a></td>";
+            resultado += "    <td><a href='#' onclick='borrar(" + lista[i].id + ")'><img src='botones/eliminar.png'/></a></td>";
             resultado += "    </td>";
             resultado += "</tr>";
 

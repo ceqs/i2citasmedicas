@@ -25,7 +25,7 @@ public class UsuarioDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = usuarioDaoAPI.findByUsuario(username);
 		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority(usuario.getRoleName()));
+		authorities.add(new SimpleGrantedAuthority(usuario.getRol().getId()));
 		return new User(username, usuario.getPassword(), authorities);
 	}
 

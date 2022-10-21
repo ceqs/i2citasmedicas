@@ -98,7 +98,6 @@ databaseChangeLog:
         - column:
             constraints:
               nullable: false
-              primaryKey: true
             name: id_esp
             type: INT
         tableName: medicos

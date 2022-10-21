@@ -1,10 +1,6 @@
 package pe.edu.utp.i2.citasmedicas.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "usuarios")
 public class Usuario {
@@ -13,11 +9,12 @@ public class Usuario {
 	@Column
 	private String usuario;
 	
-	@Column()
+	@Column
 	private String password;
 	
-	@Column(name = "id_rol")
-	private String roleName;
+	@ManyToOne
+	@JoinColumn(name = "id_rol", nullable = false)
+	private Rol rol;
 
 	@Column
 	private Boolean enabled;
@@ -46,11 +43,11 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public String getRoleName() {
-		return roleName;
+	public Rol getRol() {
+		return rol;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 }

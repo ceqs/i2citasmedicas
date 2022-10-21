@@ -10,13 +10,13 @@ import pe.edu.utp.i2.citasmedicas.model.Paciente;
 import pe.edu.utp.i2.citasmedicas.service.api.PacienteServiceAPI;
 
 @Service
-public class PacienteServiceImpl extends GenericServiceImpl<Paciente, Long> implements PacienteServiceAPI {
+public class PacienteServiceImpl extends GenericServiceImpl<Paciente, Integer> implements PacienteServiceAPI {
 
 	@Autowired
 	private PacienteDaoAPI pacienteDaoAPI;
 	
 	@Override
-	public CrudRepository<Paciente, Long> getDao() {
+	public CrudRepository<Paciente, Integer> getDao() {
 		return pacienteDaoAPI;
 	}
 

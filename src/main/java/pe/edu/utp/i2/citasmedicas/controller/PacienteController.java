@@ -36,28 +36,28 @@ public class PacienteController {
 
 	@GetMapping("/create")
 	public String create(Model model) {
-		model.addAttribute("persona", new Paciente());
+		model.addAttribute("paciente", new Paciente());
 		return "save";
 	}
 
 	@GetMapping("/save/{id}")
-	public String showSave(@PathVariable("id") Long id, Model model) {
+	public String showSave(@PathVariable("id") Integer id, Model model) {
 		if (id != null && id != 0) {
-			model.addAttribute("persona", pacienteServiceAPI.get(id));
+			model.addAttribute("paciente", pacienteServiceAPI.get(id));
 		} else {
-			model.addAttribute("persona", new Paciente());
+			model.addAttribute("paciente", new Paciente());
 		}
 		return "save";
 	}
 
 	@PostMapping("/save")
-	public String save(Paciente persona, Model model) {
-		pacienteServiceAPI.save(persona);
+	public String save(Paciente paciente, Model model) {
+		pacienteServiceAPI.save(paciente);
 		return "redirect:/home/";
 	}
 
 	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable Long id, Model model) {
+	public String delete(@PathVariable Integer id, Model model) {
 		pacienteServiceAPI.delete(id);
 
 		return "redirect:/home/";
