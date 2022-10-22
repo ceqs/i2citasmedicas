@@ -2,8 +2,13 @@ $(document).ready(function () {
 
     $("#btnGuardar_esp").click(function () {
         var especialidad = {
+            id:  $('#txtcodigo_esp').val(),
             descripcion:$("#txtnombre_esp").val()
         };
+
+        if($('#opc_esp').val() == "1") {
+            especialidad.id = null;
+        }
 
         $.ajax({
           url:"/v1/especialidades",
@@ -43,54 +48,47 @@ function editar(_id) {
 }
 
 function checkModal() {
-    //$('#modalInfo_esp').appendTo("body").modal('show');
     if($('#modalInfo_esp_moved').length) {
-        // destruyo el nuevo y me quedo con el antiguo.
         $( "#modalInfo_esp" ).remove();
     }
     else {
-        // lo muevo lo muevo al body y ke asigno el nuevo id.
         $('#modalInfo_esp').appendTo("body");
         $("#modalInfo_esp").attr("id", "modalInfo_esp_moved");
     }
 }
 
 function borrar(_id) {
-    delData(_id);
+    $.ajax({
+      url:"/v1/especialidades/"+ _id,
+      type:"DELETE",
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function(){
+        getDataListado();
+      }
+    });
 }
 
 function getData(_id) {
-    let opc = "3";
-    $.post("especialidad", {opc, _id}, function (response) {
-        var odata = $.parseJSON(response);
-        $('#txtcodigo_esp').val(odata.idEspecialidad);
-        $('#txtnombre_esp').val(odata.nomEspecialidad);
+    $.getJSON("/v1/especialidades/" + _id, function (response) {
+        $('#txtcodigo_esp').val(response.id);
+        $('#txtnombre_esp').val(response.descripcion);
     });
 }
-function delData(_id) {
-    let opc = "4";
-    $.post("especialidad", {opc, _id}, function (response) {
-        getDataListado();
-    });
-}
-
 
 function getDataListado() {
     $.getJSON("/v1/especialidades", function (lista) {
-        //var lista = $.parseJSON(response);
-
         var resultado = "";
         tablaMaestra.destroy();
         $("#tblMaestraBody_esp").html("");
         for (var i = 0; i < lista.length; i++) {
-
             resultado = "";
             resultado += "<tr>";
             resultado += "    <td>" + i + "</td>";
             resultado += "    <td>" + lista[i].id + "</td>";
             resultado += "    <td>" + lista[i].descripcion + "</td> ";
-            resultado += "    <td><a href='#' onclick='editar(" + lista[i].id + ")'><img src='botones/Edit.gif'/></a></td>";
-            resultado += "    <td><a href='#' onclick='borrar(" + lista[i].id + ")'><img src='botones/eliminar.png'/></a></td>";
+            resultado += "    <td><a href='#' onclick='editar(" + lista[i].id + ")'><img src='/images/edit.gif'/></a></td>";
+            resultado += "    <td><a href='#' onclick='borrar(" + lista[i].id + ")'><img src='/images/eliminar.png'/></a></td>";
             resultado += "    </td>";
             resultado += "</tr>";
 
