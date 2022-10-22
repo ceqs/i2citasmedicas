@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import pe.edu.utp.i2.citasmedicas.model.Paciente;
 import pe.edu.utp.i2.citasmedicas.service.api.PacienteServiceAPI;
 
@@ -29,21 +28,21 @@ public class PacienteApiController {
 	}
 
 	@PostMapping(value = "/pacientes")
-	public ResponseEntity<Paciente> save(@RequestBody Paciente persona) {
-		Paciente obj = pacienteServiceAPI.save(persona);
+	public ResponseEntity<Paciente> save(@RequestBody Paciente paciente) {
+		Paciente obj = pacienteServiceAPI.save(paciente);
 		return new ResponseEntity<Paciente>(obj, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/pacientes/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Paciente> delete(@PathVariable Integer id) {
-		Paciente persona = pacienteServiceAPI.get(id);
-		if (persona != null) {
+		Paciente paciente = pacienteServiceAPI.get(id);
+		if (paciente != null) {
 			pacienteServiceAPI.delete(id);
 		} else {
 			return new ResponseEntity<Paciente>(HttpStatus.NO_CONTENT);
 		}
 		
-		return new ResponseEntity<Paciente>(persona, HttpStatus.OK);
+		return new ResponseEntity<Paciente>(paciente, HttpStatus.OK);
 	}
 
 }

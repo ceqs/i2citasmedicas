@@ -1,31 +1,35 @@
 $(document).ready(function () {
 
     $("#btnGuardar_esp").click(function () {
-        var especialidad = {
-            id:  $('#txtcodigo_esp').val(),
-            descripcion:$("#txtnombre_esp").val()
-        };
-
-        if($('#opc_esp').val() == "1") {
-            especialidad.id = null;
-        }
-
-        $.ajax({
-          url:"/v1/especialidades",
-          type:"POST",
-          data:JSON.stringify(especialidad),
-          contentType:"application/json; charset=utf-8",
-          dataType:"json",
-          success: function(){
-            $('#modalInfo_esp_moved').modal('hide');
-            getDataListado();
-          }
-        });
+        guardar();
     });
 
     setTypeDataTableMaestra();
     getDataListado();
 });
+
+function guardar() {
+    var especialidad = {
+        id:  $('#txtcodigo_esp').val(),
+        descripcion:$("#txtnombre_esp").val()
+    };
+
+    if($('#opc_esp').val() == "1") {
+        especialidad.id = null;
+    }
+
+    $.ajax({
+      url:"/v1/especialidades",
+      type:"POST",
+      data:JSON.stringify(especialidad),
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function(){
+        $('#modalInfo_esp_moved').modal('hide');
+        getDataListado();
+      }
+    });
+}
 
 function limpiar() {
     $('#txtcodigo_esp').val("");
@@ -79,7 +83,11 @@ function getData(_id) {
 function getDataListado() {
     $.getJSON("/v1/especialidades", function (lista) {
         var resultado = "";
-        tablaMaestra.destroy();
+
+        if($.fn.DataTable.isDataTable('#tblMaestraBody_esp')) {
+             $('#tblMaestraBody_esp').DataTable().destroy();
+        }
+
         $("#tblMaestraBody_esp").html("");
         for (var i = 0; i < lista.length; i++) {
             resultado = "";
@@ -99,36 +107,35 @@ function getDataListado() {
 }
 
 function setTypeDataTableMaestra() {
-    tablaMaestra = $('#tablaMaestra_esp').DataTable(
-            {
-                "language": {
-                    "sProcessing": "Procesando...",
-                    "sLengthMenu": "Mostrar _MENU_ registros",
-                    "sZeroRecords": "No se encontraron resultados",
-                    "sEmptyTable": "Ningún dato disponible en esta tabla",
-                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    "sInfoPostFix": "",
-                    "sSearch": "Buscar:",
-                    "sUrl": "",
-                    "sInfoThousands": ",",
-                    "sLoadingRecords": "Cargando...",
-                    "oPaginate": {
-                        "sFirst": "Primero",
-                        "sLast": "Último",
-                        "sNext": "Siguiente",
-                        "sPrevious": "Anterior"
-                    },
-                    "oAria": {
-                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    }
-                },
-                "pageLength": 50,
-                deferRender: true,
-                scrollY: 400,
-                scrollCollapse: true,
-                scroller: true
-            });
+    $('#tablaMaestra_esp').DataTable({
+        "language": {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        },
+        "pageLength": 50,
+        deferRender: true,
+        scrollY: 400,
+        scrollCollapse: true,
+        scroller: true
+    });
 }

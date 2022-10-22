@@ -5,9 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.utp.i2.citasmedicas.model.Especialidad;
-import pe.edu.utp.i2.citasmedicas.model.Paciente;
 import pe.edu.utp.i2.citasmedicas.service.api.EspecialidadServiceAPI;
-import pe.edu.utp.i2.citasmedicas.service.api.PacienteServiceAPI;
 
 import java.util.List;
 

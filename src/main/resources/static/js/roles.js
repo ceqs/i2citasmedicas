@@ -1,16 +1,31 @@
 $(document).ready(function () {
 
     $("#btn_guardar_roles").click(function () {
-        $.post("rol", $("#form_roles").serialize(), function (response) {
-            $('#modal_roles_moved').modal('hide');
-            getDataListadoRoles();
-        });
-
+        guardar();
     });
 
     setTypeDataTableMaestraRoles();
     getDataListadoRoles();
 });
+
+function guardar() {
+    var rol = {
+        id:  $('#txtcodigo_roles').val(),
+        nombre:$("#txtnombre_esp").val()
+    };
+
+    $.ajax({
+      url:"/v1/roles",
+      type:"POST",
+      data:JSON.stringify(rol),
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function(){
+        $('#modal_roles_moved').modal('hide');
+        getDataListadoRoles();
+      }
+    });
+}
 
 function limpiar() {
     $('#txtcodigo_roles').val("");
@@ -34,54 +49,48 @@ function editar(_id) {
 
 function checkModal() {
     if($('#modal_roles_moved').length) {
-        // destruyo el nuevo y me quedo con el antiguo.
         $( "#modal_roles" ).remove();
     }
     else {
-        // lo muevo lo muevo al body y ke asigno el nuevo id.
         $('#modal_roles').appendTo("body");
         $("#modal_roles").attr("id", "modal_roles_moved");
     }
 }
 
 function borrar(_id) {
-    delData(_id);
+    $.ajax({
+      url:"/v1/roles/"+ _id,
+      type:"DELETE",
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function(){
+        getDataListadoRoles();
+      }
+    });
 }
 
 function getData(_id) {
-    let opc = "3";
-    $.post("rol", {opc, _id}, function (response) {
-        var odata = $.parseJSON(response);
-        $('#txtcodigo_roles').val(odata.idRol);
-        $('#txtnombre_roles').val(odata.nomRol);
+    $.getJSON("/v1/roles/" + _id, function (response) {
+        $('#txtcodigo_roles').val(response.idRol);
+        $('#txtnombre_roles').val(response.nomRol);
     });
 }
-function delData(_id) {
-    let opc = "4";
-    $.post("rol", {opc, _id}, function (response) {
-        getDataListadoRoles();
-    });
-}
-
 
 function getDataListadoRoles() {
-    //JSON.parse(response
-    opc = "0";
-    $.post("rol", {opc}, function (response) {
-        var lista = $.parseJSON(response);
+    $.getJSON("rol", function (lista) {
         var resultado = "";
         
-        if ( $.fn.DataTable.isDataTable('#tbl_maestra_roles') ) {
+        if($.fn.DataTable.isDataTable('#tbl_maestra_roles')) {
              $('#tbl_maestra_roles').DataTable().destroy();
         }
         
         $("#tbl_maestra_body_roles").html("");
-        for (var i = 0; i < lista.length; i++) {
+        for(var i = 0; i < lista.length; i++) {
             resultado = "";
             resultado += "<tr>";
             resultado += "    <td>" + i + "</td>";
-            resultado += "    <td>" + lista[i].idRol + "</td>";
-            resultado += "    <td>" + lista[i].nomRol + "</td> ";
+            resultado += "    <td>" + lista[i].id + "</td>";
+            resultado += "    <td>" + lista[i].nombre + "</td> ";
             resultado += "    <td><a href='#' onclick='editar(" + lista[i].idRol + ")'><img src='botones/Edit.gif'/></a></td>";
             resultado += "    <td><a href='#' onclick='borrar(" + lista[i].idRol + ")'><img src='botones/eliminar.png'/></a></td>";
             resultado += "    </td>";
