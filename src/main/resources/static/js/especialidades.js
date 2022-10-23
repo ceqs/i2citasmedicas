@@ -10,8 +10,8 @@ $(document).ready(function () {
 
 function guardar() {
     var especialidad = {
-        id:  $('#txtcodigo_esp').val(),
-        descripcion:$("#txtnombre_esp").val()
+        id: $('#txtcodigo_esp').val(),
+        descripcion: $("#txtnombre_esp").val()
     };
 
     if($('#opc_esp').val() == "1") {

@@ -23,7 +23,7 @@ public class UsuarioApiController {
 		return usuarioServiceAPI.getAll();
 	}
 	
-	@GetMapping(value = "/usuarios/{id}")
+	@GetMapping(value = "/usuarios/{username}")
 	public Usuario getById(@PathVariable String username) {
 		return usuarioServiceAPI.get(username);
 	}
@@ -34,7 +34,7 @@ public class UsuarioApiController {
 		return new ResponseEntity<Usuario>(obj, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/usuarios/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/usuarios/{username}", method = RequestMethod.DELETE)
 	public ResponseEntity<Usuario> delete(@PathVariable String username) {
 		Usuario usuario = usuarioServiceAPI.get(username);
 		if (usuario != null) {

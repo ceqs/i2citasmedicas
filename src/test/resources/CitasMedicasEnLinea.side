@@ -202,12 +202,542 @@
       "value": ""
     }]
   }, {
-    "id": "d0bb28bc-71d7-4b8c-936a-0219f491a692",
-    "name": "Test - CRUD Usuarios",
+    "id": "55777750-451f-46b0-a1c7-c0ebd5dc6891",
+    "name": "Test - CRUD Especialidades",
+    "commands": [{
+      "id": "ecb6b60b-6767-4595-bab1-359d840ed109",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bcc0f0d3-f23a-4d6d-b676-8834249c245d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1584x958",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "014736c0-336c-4d1b-920f-eab50eb3f056",
+      "comment": "",
+      "command": "click",
+      "target": "id=frmLoginUsuario",
+      "targets": [
+        ["id=frmLoginUsuario", "id"],
+        ["name=username", "name"],
+        ["css=#frmLoginUsuario", "css:finder"],
+        ["xpath=//input[@id='frmLoginUsuario']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6b499fa5-96e6-4f5b-8fe3-8ddac2185146",
+      "comment": "",
+      "command": "type",
+      "target": "id=frmLoginUsuario",
+      "targets": [
+        ["id=frmLoginUsuario", "id"],
+        ["name=username", "name"],
+        ["css=#frmLoginUsuario", "css:finder"],
+        ["xpath=//input[@id='frmLoginUsuario']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "admin"
+    }, {
+      "id": "9dbcc5bf-7d99-4eb0-8f7d-edb174321a40",
+      "comment": "",
+      "command": "type",
+      "target": "id=frmLoginPassword",
+      "targets": [
+        ["id=frmLoginPassword", "id"],
+        ["name=password", "name"],
+        ["css=#frmLoginPassword", "css:finder"],
+        ["xpath=//input[@id='frmLoginPassword']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "admin"
+    }, {
+      "id": "d5b117fd-252e-468f-b6d9-d19536f5d63b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Iniciar Sesión')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5e98839b-53d0-4f0f-8023-76a4cd57008f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Administración",
+      "targets": [
+        ["linkText=Administración", "linkText"],
+        ["css=li:nth-child(3) > .dropdown-toggle", "css:finder"],
+        ["xpath=//a[contains(text(),'Administración')]", "xpath:link"],
+        ["xpath=//nav[@id='sidebar']/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#adminSubmenu')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Administración')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2af0267a-b46a-4b32-ba87-b59e89923e51",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Especialidad",
+      "targets": [
+        ["linkText=Especialidad", "linkText"],
+        ["css=#adminSubmenu > li:nth-child(1) > .menu-options", "css:finder"],
+        ["xpath=//a[contains(text(),'Especialidad')]", "xpath:link"],
+        ["xpath=//ul[@id='adminSubmenu']/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/especialidades')]", "xpath:href"],
+        ["xpath=//li[2]/ul/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Especialidad')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "55e790d9-2f8f-42c3-8436-977038acb9b9",
+      "comment": "",
+      "command": "click",
+      "target": "id=btnNuevo_esp",
+      "targets": [
+        ["id=btnNuevo_esp", "id"],
+        ["linkText=Nuevo Ingreso", "linkText"],
+        ["css=#btnNuevo_esp", "css:finder"],
+        ["xpath=//a[contains(text(),'Nuevo Ingreso')]", "xpath:link"],
+        ["xpath=//a[@id='btnNuevo_esp']", "xpath:attributes"],
+        ["xpath=//section[@id='main-content_esp']/section/div/div[2]/section/nav/div/a", "xpath:idRelative"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Nuevo Ingreso')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e004e882-9a2d-4f8b-847c-1626ee3eec6a",
+      "comment": "",
+      "command": "click",
+      "target": "id=txtnombre_esp",
+      "targets": [
+        ["id=txtnombre_esp", "id"],
+        ["name=txtnombre", "name"],
+        ["css=#txtnombre_esp", "css:finder"],
+        ["xpath=//input[@id='txtnombre_esp']", "xpath:attributes"],
+        ["xpath=//form[@id='form_esp']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c1924fa3-fce2-4cfa-bc11-66bb730e6112",
+      "comment": "",
+      "command": "type",
+      "target": "id=txtnombre_esp",
+      "targets": [
+        ["id=txtnombre_esp", "id"],
+        ["name=txtnombre", "name"],
+        ["css=#txtnombre_esp", "css:finder"],
+        ["xpath=//input[@id='txtnombre_esp']", "xpath:attributes"],
+        ["xpath=//form[@id='form_esp']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Gastroenterología"
+    }, {
+      "id": "e25e9ae8-93c1-4866-ae59-6ab5f1d2c1ca",
+      "comment": "",
+      "command": "click",
+      "target": "id=btnGuardar_esp",
+      "targets": [
+        ["id=btnGuardar_esp", "id"],
+        ["css=#btnGuardar_esp", "css:finder"],
+        ["xpath=//button[@id='btnGuardar_esp']", "xpath:attributes"],
+        ["xpath=//div[@id='modalInfo_esp_moved']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Guardar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b8735293-e744-4664-b7b9-ae668a4e383a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.even > td:nth-child(4) img",
+      "targets": [
+        ["css=.even > td:nth-child(4) img", "css:finder"],
+        ["xpath=//tbody[@id='tblMaestraBody_esp']/tr[2]/td[4]/a/img", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "40ae5ffb-e020-4fcb-bac8-eb9b1e063e8f",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.even > td:nth-child(4) img",
+      "targets": [
+        ["css=.even > td:nth-child(4) img", "css:finder"],
+        ["xpath=//tbody[@id='tblMaestraBody_esp']/tr[2]/td[4]/a/img", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "20e21fbd-7708-4732-a4e6-8879e4140ded",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.even > td:nth-child(4) img",
+      "targets": [
+        ["css=.even > td:nth-child(4) img", "css:finder"],
+        ["xpath=//tbody[@id='tblMaestraBody_esp']/tr[2]/td[4]/a/img", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6700a5b3-6033-41b9-a9fb-2d0ed9d42cbd",
+      "comment": "",
+      "command": "click",
+      "target": "id=txtnombre_esp",
+      "targets": [
+        ["id=txtnombre_esp", "id"],
+        ["name=txtnombre", "name"],
+        ["css=#txtnombre_esp", "css:finder"],
+        ["xpath=//input[@id='txtnombre_esp']", "xpath:attributes"],
+        ["xpath=//form[@id='form_esp']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "875b967b-a4ea-4a33-a842-d15c5c3844bf",
+      "comment": "",
+      "command": "type",
+      "target": "id=txtnombre_esp",
+      "targets": [
+        ["id=txtnombre_esp", "id"],
+        ["name=txtnombre", "name"],
+        ["css=#txtnombre_esp", "css:finder"],
+        ["xpath=//input[@id='txtnombre_esp']", "xpath:attributes"],
+        ["xpath=//form[@id='form_esp']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Gastroenterologías"
+    }, {
+      "id": "2f926be1-5351-48fe-b9a5-25a61f3e87a7",
+      "comment": "",
+      "command": "click",
+      "target": "id=btnGuardar_esp",
+      "targets": [
+        ["id=btnGuardar_esp", "id"],
+        ["css=#btnGuardar_esp", "css:finder"],
+        ["xpath=//button[@id='btnGuardar_esp']", "xpath:attributes"],
+        ["xpath=//div[@id='modalInfo_esp_moved']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Guardar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2a1407b9-39e9-46b6-9a88-c15a1e1678e2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.even > td:nth-child(5) img",
+      "targets": [
+        ["css=.even > td:nth-child(5) img", "css:finder"],
+        ["xpath=//tbody[@id='tblMaestraBody_esp']/tr[2]/td[5]/a/img", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[5]/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3f3116aa-d058-423d-b582-391f7e69d6ea",
+    "name": "Test - CRUD Roles",
+    "commands": [{
+      "id": "eabaec3f-350f-4016-a1cc-f46adfb3dad7",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "831f7674-924e-4f12-b467-fef8c2bacc13",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1584x958",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e370439b-1519-481b-a714-51256cf1d3da",
+      "comment": "",
+      "command": "click",
+      "target": "id=frmLoginUsuario",
+      "targets": [
+        ["id=frmLoginUsuario", "id"],
+        ["name=username", "name"],
+        ["css=#frmLoginUsuario", "css:finder"],
+        ["xpath=//input[@id='frmLoginUsuario']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "978ae636-36fd-4ff8-94ee-5f39173192fd",
+      "comment": "",
+      "command": "type",
+      "target": "id=frmLoginUsuario",
+      "targets": [
+        ["id=frmLoginUsuario", "id"],
+        ["name=username", "name"],
+        ["css=#frmLoginUsuario", "css:finder"],
+        ["xpath=//input[@id='frmLoginUsuario']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "admin"
+    }, {
+      "id": "7e0210e6-a38d-45d1-aef5-7f2bb12b052b",
+      "comment": "",
+      "command": "type",
+      "target": "id=frmLoginPassword",
+      "targets": [
+        ["id=frmLoginPassword", "id"],
+        ["name=password", "name"],
+        ["css=#frmLoginPassword", "css:finder"],
+        ["xpath=//input[@id='frmLoginPassword']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "admin"
+    }, {
+      "id": "9e310491-da39-4a05-a60c-98a4960f9961",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Iniciar Sesión')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f05cb107-0a63-4921-a6b5-7791441063b0",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Seguridad",
+      "targets": [
+        ["linkText=Seguridad", "linkText"],
+        ["css=li:nth-child(4) > .dropdown-toggle", "css:finder"],
+        ["xpath=//a[contains(text(),'Seguridad')]", "xpath:link"],
+        ["xpath=//nav[@id='sidebar']/ul/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#seguridadSubmenu')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Seguridad')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b7d8696a-924a-48e4-a84b-e1593bbcc583",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Roles",
+      "targets": [
+        ["linkText=Roles", "linkText"],
+        ["css=#seguridadSubmenu > li:nth-child(1) > .menu-options", "css:finder"],
+        ["xpath=//a[contains(text(),'Roles')]", "xpath:link"],
+        ["xpath=//ul[@id='seguridadSubmenu']/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/roles')]", "xpath:href"],
+        ["xpath=//li[3]/ul/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Roles')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7de9315c-28d2-44bb-a419-193ae8b1a7f4",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Nuevo Ingreso",
+      "targets": [
+        ["linkText=Nuevo Ingreso", "linkText"],
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Nuevo Ingreso')]", "xpath:link"],
+        ["xpath=//a[@onclick='nuevo()']", "xpath:attributes"],
+        ["xpath=//div[@id='content-options']/section/section/div/div[2]/section/nav/div/a", "xpath:idRelative"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Nuevo Ingreso')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "18817dd9-6796-4df2-8f7f-b6b0fb2a7bbc",
+      "comment": "",
+      "command": "click",
+      "target": "id=txtcodigo_roles",
+      "targets": [
+        ["id=txtcodigo_roles", "id"],
+        ["name=txtcodigo", "name"],
+        ["css=#txtcodigo_roles", "css:finder"],
+        ["xpath=//input[@id='txtcodigo_roles']", "xpath:attributes"],
+        ["xpath=//form[@id='form_roles']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d32fce83-5c6e-4ad0-9e86-6e104ee7b4d9",
+      "comment": "",
+      "command": "type",
+      "target": "id=txtcodigo_roles",
+      "targets": [
+        ["id=txtcodigo_roles", "id"],
+        ["name=txtcodigo", "name"],
+        ["css=#txtcodigo_roles", "css:finder"],
+        ["xpath=//input[@id='txtcodigo_roles']", "xpath:attributes"],
+        ["xpath=//form[@id='form_roles']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "PACIENTE"
+    }, {
+      "id": "3426d86f-6c60-4d5f-9f9d-91ea8aa569c7",
+      "comment": "",
+      "command": "type",
+      "target": "id=txtnombre_roles",
+      "targets": [
+        ["id=txtnombre_roles", "id"],
+        ["name=txtnombre", "name"],
+        ["css=#txtnombre_roles", "css:finder"],
+        ["xpath=//input[@id='txtnombre_roles']", "xpath:attributes"],
+        ["xpath=//form[@id='form_roles']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Pacientes"
+    }, {
+      "id": "e56799fb-eb5d-4e6a-a11d-72996878f8c4",
+      "comment": "",
+      "command": "click",
+      "target": "id=btn_guardar_roles",
+      "targets": [
+        ["id=btn_guardar_roles", "id"],
+        ["css=#btn_guardar_roles", "css:finder"],
+        ["xpath=//button[@id='btn_guardar_roles']", "xpath:attributes"],
+        ["xpath=//div[@id='modal_roles_moved']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Guardar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "197269a8-1bb4-4a25-8f4a-b9905131b362",
+      "comment": "",
+      "command": "click",
+      "target": "css=.even > td:nth-child(4) img",
+      "targets": [
+        ["css=.even > td:nth-child(4) img", "css:finder"],
+        ["xpath=//tbody[@id='tbl_maestra_body_roles']/tr[2]/td[4]/a/img", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ccfa40ab-af53-4a56-8ab1-a25f849306cf",
+      "comment": "",
+      "command": "click",
+      "target": "id=txtnombre_roles",
+      "targets": [
+        ["id=txtnombre_roles", "id"],
+        ["name=txtnombre", "name"],
+        ["css=#txtnombre_roles", "css:finder"],
+        ["xpath=//input[@id='txtnombre_roles']", "xpath:attributes"],
+        ["xpath=//form[@id='form_roles']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9836a36e-04a9-44be-8bdb-1471f80dd928",
+      "comment": "",
+      "command": "type",
+      "target": "id=txtnombre_roles",
+      "targets": [
+        ["id=txtnombre_roles", "id"],
+        ["name=txtnombre", "name"],
+        ["css=#txtnombre_roles", "css:finder"],
+        ["xpath=//input[@id='txtnombre_roles']", "xpath:attributes"],
+        ["xpath=//form[@id='form_roles']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "PacientesX"
+    }, {
+      "id": "6e720398-212b-43b6-aef6-8d4b750bb16f",
+      "comment": "",
+      "command": "click",
+      "target": "id=btn_guardar_roles",
+      "targets": [
+        ["id=btn_guardar_roles", "id"],
+        ["css=#btn_guardar_roles", "css:finder"],
+        ["xpath=//button[@id='btn_guardar_roles']", "xpath:attributes"],
+        ["xpath=//div[@id='modal_roles_moved']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Guardar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "91eca3fc-f5df-4dca-9578-5eaf344b28c8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.even > td:nth-child(4) img",
+      "targets": [
+        ["css=.even > td:nth-child(4) img", "css:finder"],
+        ["xpath=//tbody[@id='tbl_maestra_body_roles']/tr[2]/td[4]/a/img", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[4]/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f095cfca-bf66-429a-b80c-2ee3f7c354ff",
+      "comment": "",
+      "command": "click",
+      "target": "id=txtnombre_roles",
+      "targets": [
+        ["id=txtnombre_roles", "id"],
+        ["name=txtnombre", "name"],
+        ["css=#txtnombre_roles", "css:finder"],
+        ["xpath=//input[@id='txtnombre_roles']", "xpath:attributes"],
+        ["xpath=//form[@id='form_roles']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cd64ad07-d0a2-46da-8c9a-594306d48a41",
+      "comment": "",
+      "command": "type",
+      "target": "id=txtnombre_roles",
+      "targets": [
+        ["id=txtnombre_roles", "id"],
+        ["name=txtnombre", "name"],
+        ["css=#txtnombre_roles", "css:finder"],
+        ["xpath=//input[@id='txtnombre_roles']", "xpath:attributes"],
+        ["xpath=//form[@id='form_roles']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Pacientes"
+    }, {
+      "id": "94230017-a274-48d4-b3c1-75a9b922060f",
+      "comment": "",
+      "command": "click",
+      "target": "id=btn_guardar_roles",
+      "targets": [
+        ["id=btn_guardar_roles", "id"],
+        ["css=#btn_guardar_roles", "css:finder"],
+        ["xpath=//button[@id='btn_guardar_roles']", "xpath:attributes"],
+        ["xpath=//div[@id='modal_roles_moved']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Guardar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "91ea9c54-8aa0-4859-ad29-0d8aee5d55d0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.even > td:nth-child(5) img",
+      "targets": [
+        ["css=.even > td:nth-child(5) img", "css:finder"],
+        ["xpath=//tbody[@id='tbl_maestra_body_roles']/tr[2]/td[5]/a/img", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[5]/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "cd0cda85-daf3-4caa-990c-3cbe054a5610",
+    "name": "Test - CRUD Medicos",
     "commands": []
   }, {
-    "id": "55777750-451f-46b0-a1c7-c0ebd5dc6891",
-    "name": "Test - CRUD Medicos",
+    "id": "0dca4c45-c528-413d-a492-24a3bbe46e73",
+    "name": "Test - CRUD Usuarios",
     "commands": []
   }],
   "suites": [{

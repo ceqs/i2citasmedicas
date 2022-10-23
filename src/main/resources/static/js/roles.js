@@ -10,8 +10,8 @@ $(document).ready(function () {
 
 function guardar() {
     var rol = {
-        id:  $('#txtcodigo_roles').val(),
-        nombre:$("#txtnombre_esp").val()
+        id: $('#txtcodigo_roles').val(),
+        nombre: $("#txtnombre_roles").val()
     };
 
     $.ajax({
@@ -71,8 +71,8 @@ function borrar(_id) {
 
 function getData(_id) {
     $.getJSON("/v1/roles/" + _id, function (response) {
-        $('#txtcodigo_roles').val(response.idRol);
-        $('#txtnombre_roles').val(response.nomRol);
+        $('#txtcodigo_roles').val(response.id);
+        $('#txtnombre_roles').val(response.nombre);
     });
 }
 
@@ -91,8 +91,8 @@ function getDataListadoRoles() {
             resultado += "    <td>" + i + "</td>";
             resultado += "    <td>" + lista[i].id + "</td>";
             resultado += "    <td>" + lista[i].nombre + "</td> ";
-            resultado += "    <td><a href='#' onclick='editar(" + lista[i].id + ")'><img src='/images/edit.gif'/></a></td>";
-            resultado += "    <td><a href='#' onclick='borrar(" + lista[i].id + ")'><img src='/images/eliminar.png'/></a></td>";
+            resultado += "    <td><a href='#' onclick='editar(\"" + lista[i].id + "\")'><img src='/images/edit.gif'/></a></td>";
+            resultado += "    <td><a href='#' onclick='borrar(\"" + lista[i].id + "\")'><img src='/images/eliminar.png'/></a></td>";
             resultado += "    </td>";
             resultado += "</tr>";
 

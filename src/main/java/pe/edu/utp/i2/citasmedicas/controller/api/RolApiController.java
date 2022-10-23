@@ -23,8 +23,8 @@ public class RolApiController {
 	}
 	
 	@GetMapping(value = "/roles/{id}")
-	public Rol getById(@PathVariable String rolename) {
-		return rolServiceAPI.get(rolename);
+	public Rol getById(@PathVariable String id) {
+		return rolServiceAPI.get(id);
 	}
 
 	@PostMapping(value = "/roles")
@@ -34,10 +34,10 @@ public class RolApiController {
 	}
 
 	@RequestMapping(value = "/roles/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Rol> delete(@PathVariable String rolename) {
-		Rol rol = rolServiceAPI.get(rolename);
+	public ResponseEntity<Rol> delete(@PathVariable String id) {
+		Rol rol = rolServiceAPI.get(id);
 		if (rol != null) {
-			rolServiceAPI.delete(rolename);
+			rolServiceAPI.delete(id);
 		} else {
 			return new ResponseEntity<Rol>(HttpStatus.NO_CONTENT);
 		}
