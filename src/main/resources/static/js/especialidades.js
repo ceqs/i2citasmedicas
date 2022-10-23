@@ -84,8 +84,8 @@ function getDataListado() {
     $.getJSON("/v1/especialidades", function (lista) {
         var resultado = "";
 
-        if($.fn.DataTable.isDataTable('#tblMaestraBody_esp')) {
-             $('#tblMaestraBody_esp').DataTable().destroy();
+        if($.fn.DataTable.isDataTable('#tablaMaestra_esp')) {
+             $('#tablaMaestra_esp').DataTable().destroy();
         }
 
         $("#tblMaestraBody_esp").html("");

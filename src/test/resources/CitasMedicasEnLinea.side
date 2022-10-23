@@ -1,0 +1,223 @@
+{
+  "id": "5807560c-94ee-451e-b37f-3f43aa8959b2",
+  "version": "2.0",
+  "name": "Citas Medicas en Linea",
+  "url": "http://localhost:8080",
+  "tests": [{
+    "id": "d0c02407-eadc-486c-a5d2-5cfc1a43b06b",
+    "name": "Test - Login",
+    "commands": [{
+      "id": "dd202921-d5f8-4c67-b1bb-470643e4e5d0",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "15974b9b-52f5-4684-9e5c-6a4e354e7d02",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1371x958",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8f8fddd5-1ad2-4799-8d81-379006960bba",
+      "comment": "",
+      "command": "click",
+      "target": "id=frmLoginUsuario",
+      "targets": [
+        ["id=frmLoginUsuario", "id"],
+        ["name=username", "name"],
+        ["css=#frmLoginUsuario", "css:finder"],
+        ["xpath=//input[@id='frmLoginUsuario']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "09cfe5c9-7516-4ec0-b2f2-af8d6f391479",
+      "comment": "",
+      "command": "type",
+      "target": "id=frmLoginUsuario",
+      "targets": [
+        ["id=frmLoginUsuario", "id"],
+        ["name=username", "name"],
+        ["css=#frmLoginUsuario", "css:finder"],
+        ["xpath=//input[@id='frmLoginUsuario']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "admin"
+    }, {
+      "id": "5e0d6166-b30a-4715-8c04-ac87dc39a0ba",
+      "comment": "",
+      "command": "type",
+      "target": "id=frmLoginPassword",
+      "targets": [
+        ["id=frmLoginPassword", "id"],
+        ["name=password", "name"],
+        ["css=#frmLoginPassword", "css:finder"],
+        ["xpath=//input[@id='frmLoginPassword']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "admin"
+    }, {
+      "id": "2944fbd6-2389-4164-9efd-eb91d454516c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Iniciar Sesión')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f491020b-a1be-41a3-8aa9-1c0693912537",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Seguridad",
+      "targets": [
+        ["linkText=Seguridad", "linkText"],
+        ["css=li:nth-child(4) > .dropdown-toggle", "css:finder"],
+        ["xpath=//a[contains(text(),'Seguridad')]", "xpath:link"],
+        ["xpath=//nav[@id='sidebar']/ul/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#seguridadSubmenu')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Seguridad')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ee13b780-3d2d-4090-9b08-6ebe1d525056",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Administración",
+      "targets": [
+        ["linkText=Administración", "linkText"],
+        ["css=li:nth-child(3) > .dropdown-toggle", "css:finder"],
+        ["xpath=//a[contains(text(),'Administración')]", "xpath:link"],
+        ["xpath=//nav[@id='sidebar']/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#adminSubmenu')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Administración')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "aeda05a4-b643-4216-8e6e-68eee824bce8",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Cerrar sesión",
+      "targets": [
+        ["linkText=Cerrar sesión", "linkText"],
+        ["css=.nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Cerrar sesión')]", "xpath:link"],
+        ["xpath=//div[@id='navbarSupportedContent']/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//div/ul/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Cerrar sesión')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "c39257ef-29f6-4384-953c-4e5407cd0dc2",
+    "name": "Test - Registro",
+    "commands": [{
+      "id": "7140f7ab-e418-4dbd-848e-118ecea29d6c",
+      "comment": "",
+      "command": "open",
+      "target": "/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e53cce3a-75c7-4bb6-9df9-4fe852dedc5a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1371x958",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8c8ecd5a-d0f2-406e-ae01-df23f3b14fe2",
+      "comment": "",
+      "command": "click",
+      "target": "id=frmLoginUsuario",
+      "targets": [
+        ["id=frmLoginUsuario", "id"],
+        ["name=username", "name"],
+        ["css=#frmLoginUsuario", "css:finder"],
+        ["xpath=//input[@id='frmLoginUsuario']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0d948b42-055d-43a1-a474-6f6eb84b5d9f",
+      "comment": "",
+      "command": "type",
+      "target": "id=frmLoginUsuario",
+      "targets": [
+        ["id=frmLoginUsuario", "id"],
+        ["name=username", "name"],
+        ["css=#frmLoginUsuario", "css:finder"],
+        ["xpath=//input[@id='frmLoginUsuario']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "admin"
+    }, {
+      "id": "90acc32e-257e-4f80-b952-a169023deef1",
+      "comment": "",
+      "command": "type",
+      "target": "id=frmLoginPassword",
+      "targets": [
+        ["id=frmLoginPassword", "id"],
+        ["name=password", "name"],
+        ["css=#frmLoginPassword", "css:finder"],
+        ["xpath=//input[@id='frmLoginPassword']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "admin"
+    }, {
+      "id": "b309a312-49ec-4e34-b1a7-73aec56300d7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Iniciar Sesión')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ad7cd97f-d922-4e51-8e68-a8bee2eb586a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Cerrar sesión",
+      "targets": [
+        ["linkText=Cerrar sesión", "linkText"],
+        ["css=.nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Cerrar sesión')]", "xpath:link"],
+        ["xpath=//div[@id='navbarSupportedContent']/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/logout')]", "xpath:href"],
+        ["xpath=//div/ul/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Cerrar sesión')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "d0bb28bc-71d7-4b8c-936a-0219f491a692",
+    "name": "Test - CRUD Usuarios",
+    "commands": []
+  }, {
+    "id": "55777750-451f-46b0-a1c7-c0ebd5dc6891",
+    "name": "Test - CRUD Medicos",
+    "commands": []
+  }],
+  "suites": [{
+    "id": "451c8c95-de2f-47ba-9619-65b01859c76d",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["d0c02407-eadc-486c-a5d2-5cfc1a43b06b"]
+  }],
+  "urls": ["http://localhost:8080/"],
+  "plugins": []
+}

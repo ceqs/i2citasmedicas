@@ -77,7 +77,7 @@ function getData(_id) {
 }
 
 function getDataListadoRoles() {
-    $.getJSON("rol", function (lista) {
+    $.getJSON("/v1/roles", function (lista) {
         var resultado = "";
         
         if($.fn.DataTable.isDataTable('#tbl_maestra_roles')) {
@@ -91,8 +91,8 @@ function getDataListadoRoles() {
             resultado += "    <td>" + i + "</td>";
             resultado += "    <td>" + lista[i].id + "</td>";
             resultado += "    <td>" + lista[i].nombre + "</td> ";
-            resultado += "    <td><a href='#' onclick='editar(" + lista[i].idRol + ")'><img src='botones/Edit.gif'/></a></td>";
-            resultado += "    <td><a href='#' onclick='borrar(" + lista[i].idRol + ")'><img src='botones/eliminar.png'/></a></td>";
+            resultado += "    <td><a href='#' onclick='editar(" + lista[i].id + ")'><img src='/images/edit.gif'/></a></td>";
+            resultado += "    <td><a href='#' onclick='borrar(" + lista[i].id + ")'><img src='/images/eliminar.png'/></a></td>";
             resultado += "    </td>";
             resultado += "</tr>";
 
