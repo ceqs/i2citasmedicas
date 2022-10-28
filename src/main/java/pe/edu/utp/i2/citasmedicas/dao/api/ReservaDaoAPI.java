@@ -1,7 +1,12 @@
 package pe.edu.utp.i2.citasmedicas.dao.api;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 import pe.edu.utp.i2.citasmedicas.model.Reserva;
+
+import java.util.List;
 
 public interface ReservaDaoAPI extends CrudRepository<Reserva, Integer> {
 /*
@@ -19,9 +24,10 @@ from citas c
 where c.fecha between fecI and fecF
 	and c.idMedico = IFNULL(idMed, c.idMedico)
 	and m.idEspecialidad = IFNULL(idEsp,  m.idEspecialidad)
-    and c.idPaciente = IFNULL(idPac, c.idPaciente)  ;
+    and c.idPaciente = IFNULL(idPac, c.idPaciente);
 
--- c.fecha between '2022-02-24' and '2022-02-24'
--- set idMed = IFNULL(idMed, 99) ;
 * */
+    @Query(value = "SELECT * FROM reserva r INNER JOIN medicos m on r.id_medico = m.id_medico WHERE r.fecha_cita between :start and :end and r.id_medico = :cmed and m.id_esp = :cesp",
+           nativeQuery = true)
+    List<Reserva> findReservasByFechasEspMed(@Param("start") String start, @Param("end") String end, @Param("cesp") String cesp, @Param("cmed") Integer cmed);
 }

@@ -1,73 +1,60 @@
 $(document).ready(function () {
-    
     $("#btnBuscar").click(function () {
-        //valida
-        let txtI = form_historial.txtfechaI.value;
-        let txtF = form_historial.txtfechaF.value;
-        let cboE = form_historial.cboEspecial.value;
-        let cboM = form_historial.cboMedico.value;
-
-        if (txtI == null || txtI == "") {
-            alert("Debe especificar fecha Inicio");
-            return;
-        }
-        if (txtF == null || txtF == "") {
-            alert("Debe especificar fecha Fin");
-            return;
-        }
-        //alert("OK: " + txtI + '|' + txtF + '|' + cboE + '|' + cboM);
-
-        $.post("HistorialController", $("#form_historial").serialize(), function (response) {         
-            getDataListado(response);
-        });
+        search();
     });
-    
-    
+
     $("#cboEspecial").change(function () {        
         let _id = form_historial.cboEspecial.value;        
         validaCboEspecial(_id);
     });
     
-    validaCboEspecial("0"); 
+    validaCboEspecial("0");
     setTypeDataTableMaestra();
 });
 
+function search() {
+    let txtI = form_historial.txtfechaI.value;
+    let txtF = form_historial.txtfechaF.value;
+    let cboE = form_historial.cboEspecial.value;
+    let cboM = form_historial.cboMedico.value;
 
-function validaCboEspecial(_id){
-    let opc = "1";
-    $.post("HistorialController", {opc, _id}, function (response) {
-        getListaMedxEsp(response);
+    if (txtI == null || txtI == "") {
+        alert("Debe especificar fecha Inicio");
+        return;
+    }
+    if (txtF == null || txtF == "") {
+        alert("Debe especificar fecha Fin");
+        return;
+    }
+
+    $.getJSON("/v1/reportes", { start: txtI, end: txtF, cesp: cboE, cmed: cboM },function (lista) {
+        getDataListado(lista);
     });
 }
 
-function getListaMedxEsp(response){
-    var lista = $.parseJSON(response);     
-    var resultado = "";  
-    resultado += "<option value=0 selected='selected'>(TODOS)</option>";
-    for (var i = 0; i < lista.length; i++) {
-        resultado += "<option  value=" + lista[i].idMedico + ">" + lista[i].apellidos + "</option>";
+function validaCboEspecial(_id){
+    if(_id != "0") {
+        $.getJSON("/v1/medicos/", function (response) {
+            var resultado = "<option value=0 selected='selected'>(TODOS)</option>";
+            for (var i = 0; i < response.length; i++) {
+                resultado += "<option  value=" + response[i].id + ">" + response[i].apellidos + "</option>";
+            }
+            $("#cboMedico").html(resultado);
+        });
     }
-    $("#cboMedico").html(resultado);    
 }
 
-
-function getDataListado(response) {
-    //JSON.parse(response   
-
-    var lista = $.parseJSON(response);
-
-    var resultado = "";
+function getDataListado(lista) {
     tablaMaestra.destroy();
     $("#tblMaestraBody").html("");
     for (var i = 0; i < lista.length; i++) {
-
-        resultado = "";
-        resultado += "<tr>";        
-        resultado += "    <td>" + lista[i].str_fecha + "</td>";
-        resultado += "    <td>" + lista[i].horario + "</td>";
-        resultado += "    <td>" + lista[i].medico + "</td>";
-        resultado += "    <td>" + lista[i].especialidad + "</td>";
-        resultado += "    <td>" + lista[i].paciente + "</td>";
+        var resultado = "";
+        resultado += "<tr>";
+        resultado += "    <td>" + lista[i].fechaCita + "</td>";
+        resultado += "    <td>" + lista[i].fhInicio + "</td>";
+        resultado += "    <td>" + lista[i].medico.apellidos + "</td>";
+        resultado += "    <td>" + lista[i].medico.especialidad.descripcion + "</td>";
+        resultado += "    <td>" + lista[i].paciente.apePaterno + "</td>";
         resultado += "</tr>";
 
         $("#tblMaestraBody").append(resultado);

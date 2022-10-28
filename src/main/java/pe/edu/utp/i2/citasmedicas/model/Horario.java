@@ -12,7 +12,7 @@ public class Horario {
     @Column(name = "id_horario", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "id_medico", nullable = false)
     private Medico medico;
 
