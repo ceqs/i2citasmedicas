@@ -14,147 +14,121 @@
                     <div class="card card-registration my-4">
                         <div class="row g-0">
                             <div class="col-xl-6 d-none d-xl-block">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                                <img src="../static/images/registro.jpg" th:src="@{/images/registro.jpg}"
                                      alt="Sample photo" class="img-fluid"
                                      style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
                             </div>
                             <div class="col-xl-6">
                                 <div class="card-body p-md-5 text-black">
                                     <h3 class="mb-5 text-uppercase">Registro de Paciente Nuevo</h3>
-
-                                    <form>
+                                    <form action="#" th:action="@{/registro/guardar}" th:object="${registro}" method="post">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <select th:field="*{paciente.tipoDoc}" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="freg_tipodoc">
+                                                    <option value="0" selected>Tipo de documento</option>
+                                                    <option value="1">DNI</option>
+                                                    <option value="2">CARNET EXTRANJERIA</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-floating">
+                                                    <input th:field="*{paciente.numDoc}" type="number" class="form-control" id="freg_numdoc" placeholder="Número de documento" name="freg_numdoc">
+                                                    <label for="freg_numdoc">Número de documento</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-6 mb-4">
                                                 <div class="form-floating">
-                                                    <input type="email" class="form-control" id="floatingInputValue" placeholder="name@example.com">
-                                                    <label for="floatingInputValue">Input with value</label>
+                                                    <input th:field="*{paciente.apePaterno}" type="text" class="form-control" id="freg_apepaterno" placeholder="Apellido Paterno" name="freg_apepaterno">
+                                                    <label for="freg_apepaterno">Apellido Paterno</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-4">
                                                 <div class="form-floating">
-                                                    <input type="email" class="form-control" id="floatingInputValue2" placeholder="name@example.com">
-                                                    <label for="floatingInputValue2">Input with value</label>
+                                                    <input th:field="*{paciente.apeMaterno}" type="text" class="form-control" id="freg_apematerno" placeholder="Apellido Materno" name="freg_apematerno">
+                                                    <label for="freg_apematerno">Apellido Materno</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-floating">
+                                                    <input th:field="*{paciente.nombres}" type="text" class="form-control" id="freg_nombres" placeholder="Nombres" name="freg_nombres">
+                                                    <label for="freg_nombres">Nombres</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-floating">
+                                                    <input th:field="*{paciente.email}" type="email" class="form-control" id="freg_email" placeholder="Correo electrónico" name="freg_email">
+                                                    <label for="freg_email">Correo electrónico</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-floating">
+                                                    <input th:field="*{paciente.telefono}" type="text" class="form-control" id="freg_telefono" placeholder="Teléfono" name="freg_telefono">
+                                                    <label for="freg_telefono">Teléfono</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-floating">
+                                                    <input th:field="*{paciente.celular}" type="text" class="form-control" id="freg_celular" placeholder="Celular" name="freg_celular">
+                                                    <label for="freg_celular">Celular</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                                            <h6 class="mb-0 me-4">Genero: </h6>
+                                            <div class="form-check form-check-inline mb-0 me-4">
+                                                <input th:field="*{paciente.sexo}" class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender" value="F"/>
+                                                <label class="form-check-label" for="femaleGender">Femenino</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mb-0 me-4">
+                                                <input th:field="*{paciente.sexo}" class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender" value="M"/>
+                                                <label class="form-check-label" for="maleGender">Masculino</label>
+                                            </div>
+                                            <div class="form-check form-check-inline mb-0">
+                                                <input th:field="*{paciente.sexo}" class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender" value="O"/>
+                                                <label class="form-check-label" for="otherGender">Otros</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-floating">
+                                                    <input th:field="*{paciente.fecNac}" type="date" class="form-control" id="freg_fecnac" placeholder="Fecha de Nacimiento" name="freg_fecnac"
+                                                           min="1900-01-01" max="2022-10-29 ">
+                                                    <label for="freg_fecnac">Fecha de Nacimiento</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-floating">
+                                                    <input th:field="*{usuario.usuario}" type="text" class="form-control" id="freg_usuario" placeholder="Usuario" name="freg_usuario">
+                                                    <label for="freg_usuario">Usuario</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-floating">
+                                                    <input th:field="*{usuario.password}" type="password" class="form-control" id="freg_password" placeholder="Password" name="freg_password">
+                                                    <label for="freg_password">Password</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <div class="form-floating">
+                                                    <input type="password" class="form-control" id="freg_rpassword" placeholder="Repetir Password" name="freg_rpassword">
+                                                    <label for="freg_rpassword">Repetir password</label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-end pt-3">
-                                            <button type="reset" class="btn btn-light btn-lg">Reset all</button>
-                                            <button type="submit" class="btn btn-warning btn-lg ms-2">Submit form</button>
+                                            <button type="button" class="btn btn-light btn-lg" onclick="history.back()">Regresar</button>
+                                            <button type="submit" class="btn btn-primary btn-lg ms-2">Registrarse</button>
                                         </div>
                                     </form>
                                 </div>
-                                <!--
-                                <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase">Registro de Paciente Nuevo</h3>
-
-                                    <div class="row">
-                                        <div class="col-md-6 mb-4">
-                                            <div class="form-floating">
-                                                <input type="text" id="form3Example1m" class="form-control" />
-                                                <label for="form3Example1m">First name</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-4">
-                                            <div class="form-floating">
-                                                <input type="text" id="form3Example1n" class="form-control form-control-lg" />
-                                                <label class="form-label" for="form3Example1n">Last name</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 mb-4">
-                                            <div>
-                                                <input type="text" id="form3Example1m1" class="form-control form-control-lg" />
-                                                <label class="form-label" for="form3Example1m1">Mother's name</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-4">
-                                            <div class="form-floating">
-                                                <input type="text" id="form3Example1n1" class="form-control form-control-lg" />
-                                                <label class="form-label" for="form3Example1n1">Father's name</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-floating mb-4">
-                                        <input type="text" id="form3Example8" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form3Example8">Address</label>
-                                    </div>
-
-                                    <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
-
-                                        <h6 class="mb-0 me-4">Gender: </h6>
-
-                                        <div class="form-check form-check-inline mb-0 me-4">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                                                   value="option1" />
-                                            <label class="form-check-label" for="femaleGender">Female</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline mb-0 me-4">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                                                   value="option2" />
-                                            <label class="form-check-label" for="maleGender">Male</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline mb-0">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
-                                                   value="option3" />
-                                            <label class="form-check-label" for="otherGender">Other</label>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 mb-4">
-
-                                            <select class="select">
-                                                <option value="1">State</option>
-                                                <option value="2">Option 1</option>
-                                                <option value="3">Option 2</option>
-                                                <option value="4">Option 3</option>
-                                            </select>
-
-                                        </div>
-                                        <div class="col-md-6 mb-4">
-
-                                            <select class="select">
-                                                <option value="1">City</option>
-                                                <option value="2">Option 1</option>
-                                                <option value="3">Option 2</option>
-                                                <option value="4">Option 3</option>
-                                            </select>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="form-floating mb-4">
-                                        <input type="text" id="form3Example9" class="form-control form-control-lg" />
-                                        <label for="form3Example9">DOB</label>
-                                    </div>
-
-                                    <div class="form-floating mb-4">
-                                        <input type="text" id="form3Example90" class="form-control form-control-lg" />
-                                        <label for="form3Example90">Pincode</label>
-                                    </div>
-
-                                    <div class="form-floating mb-4">
-                                        <input type="text" id="form3Example99" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form3Example99">Course</label>
-                                    </div>
-
-                                    <div class="form-floating mb-4">
-                                        <input type="text" id="form3Example97" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form3Example97">Email ID</label>
-                                    </div>
-
-                                    <div class="d-flex justify-content-end pt-3">
-                                        <button type="button" class="btn btn-light btn-lg">Reset all</button>
-                                        <button type="button" class="btn btn-warning btn-lg ms-2">Submit form</button>
-                                    </div>
-                                </div>
-                                -->
                             </div>
                         </div>
                     </div>

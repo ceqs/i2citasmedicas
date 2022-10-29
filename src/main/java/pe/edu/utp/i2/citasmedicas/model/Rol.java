@@ -7,6 +7,7 @@ import javax.persistence.Id;
 @Entity(name = "roles")
 public class Rol {
     public final static String ADMIN = "ADMINISTRADOR";
+    public final static String PACIENTE = "PACIENTE";
 
     @Id
     @Column(name = "id_rol")
