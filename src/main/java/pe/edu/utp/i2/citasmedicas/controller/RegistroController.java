@@ -37,13 +37,30 @@ public class RegistroController {
 
 	@PostMapping("/registro/guardar")
 	public String save(Registro registro, Model model) {
-		Rol rol = rolServiceAPI.get(Rol.PACIENTE);
-		registro.getUsuario().setRol(rol);
-		BCryptPasswordEncoder passGen = new BCryptPasswordEncoder();
-		registro.getUsuario().setPassword(passGen.encode(registro.getUsuario().getPassword()));
-		Usuario usuario = usuarioServiceAPI.save(registro.getUsuario());
-		registro.getPaciente().setUsuario(usuario);
-		pacienteServiceAPI.save(registro.getPaciente());
-		return "redirect:/home/";
+		try {
+			Usuario utmp = usuarioServiceAPI.get(registro.getUsuario().getUsuario());
+			if(utmp == null) {
+				Rol rol = rolServiceAPI.get(Rol.PACIENTE);
+				registro.getUsuario().setRol(rol);
+				BCryptPasswordEncoder passGen = new BCryptPasswordEncoder();
+				registro.getUsuario().setPassword(passGen.encode(registro.getUsuario().getPassword()));
+				Usuario usuario = usuarioServiceAPI.save(registro.getUsuario());
+				registro.getPaciente().setUsuario(usuario);
+				pacienteServiceAPI.save(registro.getPaciente());
+				registro.setPaciente(new Paciente());
+				registro.setUsuario(new Usuario());
+				model.addAttribute("message", "OK");
+			}
+			else {
+				throw new RuntimeException("Usuario ya existe.");
+			}
+		}
+		catch(RuntimeException e) {
+			model.addAttribute("error", e.getMessage());
+		}
+		catch(Exception e) {
+			model.addAttribute("error", "No se pudo registrar el usuario.");
+		}
+		return "registro";
 	}
 }
