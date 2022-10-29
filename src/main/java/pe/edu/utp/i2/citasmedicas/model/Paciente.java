@@ -41,7 +41,7 @@ public class Paciente {
     @Column(name = "sexo", nullable = false, length = 1)
     private String sexo;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "usuario", nullable = false)
     private Usuario usuario;
 

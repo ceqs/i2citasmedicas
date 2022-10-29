@@ -32,7 +32,7 @@ public class Medico {
     @Column(name = "email", length = 60)
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "id_esp", nullable = false)
     private Especialidad especialidad;
 
