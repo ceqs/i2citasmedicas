@@ -44,6 +44,7 @@ public class RegistroController {
 				registro.getUsuario().setRol(rol);
 				BCryptPasswordEncoder passGen = new BCryptPasswordEncoder();
 				registro.getUsuario().setPassword(passGen.encode(registro.getUsuario().getPassword()));
+				registro.getUsuario().setEnabled(true);
 				Usuario usuario = usuarioServiceAPI.save(registro.getUsuario());
 				registro.getPaciente().setUsuario(usuario);
 				pacienteServiceAPI.save(registro.getPaciente());

@@ -1,24 +1,52 @@
 $(document).ready(function () {
 
     $("#btnGuardar").click(function () {
-        $.post("medico", $("#form_medico").serialize(), function (response) {
-            $('#modalInfoMed_moved').modal('hide');
-            getDataListado();
-        });
-
+        guardar();
     });
 
     setTypeDataTableMaestra();
     getDataListado();
 });
 
+function guardar() {
+    var medico = {
+        id: $('#txtcodigo').val(),
+        apellidos: $("#txtapellido").val(),
+        nombres: $('#txtnombre').val(),
+        sexo: ($('#rdgeneroM').checked ? "M" : "F"),
+        fecNac: $('#txtdate').val(),
+        dni: $('#txtDNI').val(),
+        telefono: $('#txtphone').val(),
+        email: $('#txtemail').val(),
+        especialidad: {
+            id: $('#cboespecialidad').val()
+        }
+    };
+
+    if($('#opc').val() == "1") {
+        medico.id = null;
+    }
+
+    $.ajax({
+      url:"/v1/medicos",
+      type:"POST",
+      data:JSON.stringify(medico),
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function(){
+        $('#modalInfoMed_moved').modal('hide');
+        getDataListado();
+      }
+    });
+}
+
 function limpiar() {
     $('#txtcodigo').val("0");
     $('#txtapellido').val("");
     $('#txtnombre').val("");
 
-    document.getElementById("rdgeneroM").checked = true;
-    document.getElementById("rdgeneroF").checked = false;
+    $('#rdgeneroM').checked = true;
+    $('#rdgeneroF').checked = false;
 
     $('#txtdate').val("");
     $('#txtDNI').val("");
@@ -33,6 +61,7 @@ function nuevo() {
     limpiar();
     $('#modalInfoMed_moved').modal('show');
 }
+
 function editar(_id) {
     checkModal();
     $('#opc').val("2");
@@ -42,57 +71,48 @@ function editar(_id) {
 }
 
 function checkModal() {
-    //$('#modalInfo_esp').appendTo("body").modal('show');
     if($('#modalInfoMed_moved').length) {
-        // destruyo el nuevo y me quedo con el antiguo.
         $( "#modalInfoMed" ).remove();
     }
     else {
-        // lo muevo lo muevo al body y ke asigno el nuevo id.
         $('#modalInfoMed').appendTo("body");
         $("#modalInfoMed").attr("id", "modalInfoMed_moved");
     }
 }
 
 function borrar(_id) {
-    delData(_id);
+    $.ajax({
+      url:"/v1/medicos/"+ _id,
+      type:"DELETE",
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function(){
+        getDataListado();
+      }
+    });
 }
 
 function getData(_id) {
-    let opc = "3";
-    $.post("medico", {opc, _id}, function (response) {
-        var odata = $.parseJSON(response);
-        $('#txtcodigo').val(odata.idMedico);       
-        $('#txtapellido').val(odata.apellidos);
-        $('#txtnombre').val(odata.nombres);
-        let bgenero = (odata.genero == "M") ? true : false;
+    $.getJSON("/v1/medicos/" + _id, function (response) {
+        $('#txtcodigo').val(response.id);
+        $('#txtapellido').val(response.apellidos);
+        $('#txtnombre').val(response.nombres);
+        let bgenero = (response.sexo == "M") ? true : false;
 
         document.getElementById("rdgeneroM").checked = bgenero;
         document.getElementById("rdgeneroF").checked = !bgenero;
 
-        $('#txtdate').val(odata.str_fecNac);        
+        $('#txtdate').val(response.fecNac);
         
-        $('#txtDNI').val(odata.DNI);
-        $('#txtphone').val(odata.telefono);
-        $('#txtemail').val(odata.email);
-        $('#cboespecialidad').val(odata.idEspecialidad);
-
+        $('#txtDNI').val(response.dni);
+        $('#txtphone').val(response.telefono);
+        $('#txtemail').val(response.email);
+        $('#cboespecialidad').val(response.especialidad.id);
     });
 }
-function delData(_id) {
-    let opc = "4";
-    $.post("medico", {opc, _id}, function (response) {
-        getDataListado();
-    });
-}
-
 
 function getDataListado() {
-    //JSON.parse(response
-    opc = "0";
-    $.post("medico", {opc}, function (response) {
-        var lista = $.parseJSON(response);
-        
+    $.getJSON("/v1/medicos", function (lista) {
         var resultado = "";
         tablaMaestra.destroy();
         $("#tblMaestraBody").html("");
@@ -100,16 +120,16 @@ function getDataListado() {
 
             resultado = "";
             resultado += "<tr>";
-            resultado += "    <td>" + lista[i].idMedico + "</td>";
+            resultado += "    <td>" + lista[i].id + "</td>";
             resultado += "    <td>" + lista[i].apellidos + " " + lista[i].nombres + "</td>";
-            resultado += "    <td>" + lista[i].genero + "</td>";
-            resultado += "    <td>" + lista[i].str_fecNac + "</td>";
-            resultado += "    <td>" + lista[i].DNI + "</td>";
+            resultado += "    <td>" + lista[i].sexo + "</td>";
+            resultado += "    <td>" + lista[i].fecNac + "</td>";
+            resultado += "    <td>" + lista[i].dni + "</td>";
             resultado += "    <td>" + lista[i].telefono + "</td>";
             resultado += "    <td>" + lista[i].email + "</td>";
-            resultado += "    <td>" + lista[i].nomEspecialidad + "</td> ";
-            resultado += "    <td><a href='#' onclick='editar(" + lista[i].idMedico + ")'><img src='botones/Edit.gif'/></a></td>";
-            resultado += "    <td><a href='#' onclick='borrar(" + lista[i].idMedico + ")'><img src='botones/eliminar.png'/></a></td>";
+            resultado += "    <td>" + lista[i].especialidad.descripcion + "</td> ";
+            resultado += "    <td><a href='#' onclick='editar(" + lista[i].id + ")'><img src='/images/edit.gif'/></a></td>";
+            resultado += "    <td><a href='#' onclick='borrar(" + lista[i].id + ")'><img src='/images/eliminar.png'/></a></td>";
             resultado += "    </td>";
             resultado += "</tr>";
 
