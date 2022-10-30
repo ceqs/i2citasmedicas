@@ -21,10 +21,10 @@
 				<p>Bienvenid@: <span th:text="${name}"></span></p>
 
                 <li th:if="${role.isAdmin() == false}">
-                    <a class="menu-options" href="Cita.jsp">Reservar cita</a>
+                    <a class="menu-options" th:href="@{/reserva}">Reservar cita</a>
                 </li>
                 <li th:if="${role.isAdmin() == false}">
-                    <a class="menu-options" href="DatosPersonales.jsp">Datos personales</a>
+                    <a class="menu-options" th:href="@{/paciente}">Datos personales</a>
                 </li>
                 <li th:if="${role.isAdmin() == true}">
                     <a class="menu-options" th:href="@{/historial}">Historial</a>
