@@ -1,5 +1,7 @@
 package pe.edu.utp.i2.citasmedicas.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -36,6 +38,7 @@ public class Paciente {
     private String email;
 
     @Column(name = "fec_nac")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate fecNac;
 
     @Column(name = "sexo", nullable = false, length = 1)

@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - comments: setup paciente rol.
+  - changeSet:
+      id: 0003-1
+      author:  ceqs (generated)
+      changes:
+        - sqlFile:
+            dbms:  'mysql'
+            endDelimiter:  ';'
+            splitStatements:  true
+            path:  db/changelog/changes/0003-setup-pacienterol.sql
+            stripComments:  true

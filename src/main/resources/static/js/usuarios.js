@@ -1,23 +1,42 @@
 $(document).ready(function () {
 
     $("#btn_guardar_usuario").click(function () {
-        $.post("usuario", $("#form_usuario").serialize(), function (response) {
-            $('#modal_usuario_moved').modal('hide');
-            getDataListadoUsuarios();
-        });
-
+        guardar();
     });
 
     setTypeDataTableMaestraUsuarios();
     getDataListadoUsuarios();
 });
 
+function guardar() {
+    var usuario = {
+        usuario: $('#txtusuario_usuario').val(),
+        password: $("#txtpassword_usuario").val(),
+        enabled: ($('#rdenabledsi_usuario').checked ? true: false),
+        rol : {
+            id: $('#cborol_usuario').val()
+        }
+    };
+
+    $.ajax({
+      url:"/v1/usuarios",
+      type:"POST",
+      data:JSON.stringify(usuario),
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function() {
+        $('#modal_usuario_moved').modal('hide');
+        getDataListadoUsuarios();
+      }
+    });
+}
+
 function limpiar() {
     $('#txtusuario_usuario').val("");
     $('#txtpassword_usuario').val("");
-    $('#cborol').val("");
-    $('rdenabledsi').checked = true;
-    $('rdenabledno').checked = false;
+    $('#cborol_usuario').val("");
+    $('#rdenabledsi_usuario').checked = true;
+    $('#rdenabledno_usuario').checked = false;
 }
 
 function nuevo() {
@@ -27,58 +46,51 @@ function nuevo() {
     $('#modal_usuario_moved').modal('show');
 }
 
-function editar(_id) {
+function editar(_usuario) {
     checkModal();
     $('#opc_usuario').val("2");
     limpiar();
-    getData(_id);
+    getData(_usuario);
     $('#modal_usuario_moved').modal('show');
 }
 
 function checkModal() {
     if($('#modal_usuario_moved').length) {
-        // destruyo el nuevo y me quedo con el antiguo.
         $( "#modal_usuario" ).remove();
     }
     else {
-        // lo muevo lo muevo al body y ke asigno el nuevo id.
         $('#modal_usuario').appendTo("body");
         $("#modal_usuario").attr("id", "modal_usuario_moved");
     }
 }
 
 function borrar(_usuario) {
-    delData(_usuario);
+    $.ajax({
+      url:"/v1/usuarios/"+ _usuario,
+      type:"DELETE",
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function(){
+        getDataListadoUsuarios();
+      }
+    });
 }
 
 function getData(_usuario) {
-    let opc = "3";
-    $.post("usuario", {opc, _usuario}, function (response) {
-        var odata = $.parseJSON(response);
-        $('#txtusuario_usuario').val(odata.usuario);
-        $('#txtpassword_usuario').val(odata.password);
-        $('#cborol').val(odata.idRol);
+    $.getJSON("/v1/usuarios/" + _usuario, function (response) {
+        $('#txtusuario_usuario').val(response.usuario);
+        $('#txtpassword_usuario').val(response.password);
+        $('#cborol_usuario').val(response.rol.id);
         
-        let benabled = (odata.enabled ? true : false);
+        let benabled = (response.enabled ? true : false);
 
-        $('rdenabledsi').checked = benabled;
-        $('rdenabledno').checked = !benabled;
+        $('#rdenabledsi_usuario').checked = benabled;
+        $('#rdenabledno_usuario').checked = !benabled;
     });
 }
-
-function delData(_usuario) {
-    let opc = "4";
-    $.post("usuario", {opc, _usuario}, function (response) {
-        getDataListadoUsuarios();
-    });
-}
-
 
 function getDataListadoUsuarios() {
-    //JSON.parse(response
-    opc = "0";
-    $.post("usuario", {opc}, function (response) {
-        var lista = $.parseJSON(response);
+    $.getJSON("/v1/usuarios", function (lista) {
         var resultado = "";
         
         if ( $.fn.DataTable.isDataTable('#tbl_maestra_usuario') ) {
@@ -92,10 +104,10 @@ function getDataListadoUsuarios() {
             resultado += "    <td>" + i + "</td>";
             resultado += "    <td>" + lista[i].usuario + "</td>";
             resultado += "    <td>" + lista[i].password.replace(/./g, '*'); + "</td> ";
-            resultado += "    <td>" + lista[i].idRol + "</td> ";
+            resultado += "    <td>" + lista[i].rol.id + "</td> ";
             resultado += "    <td>" + lista[i].enabled + "</td> ";
-            resultado += "    <td><a href='#' onclick='editar(" + lista[i].usuario + ")'><img src='botones/Edit.gif'/></a></td>";
-            resultado += "    <td><a href='#' onclick='borrar(" + lista[i].usuario + ")'><img src='botones/eliminar.png'/></a></td>";
+            resultado += "    <td><a href='#' onclick='editar(\"" + lista[i].usuario + "\")'><img src='/images/edit.gif'/></a></td>";
+            resultado += "    <td><a href='#' onclick='borrar(\"" + lista[i].usuario + "\")'><img src='/images/eliminar.png'/></a></td>";
             resultado += "    </td>";
             resultado += "</tr>";
 

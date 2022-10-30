@@ -129,7 +129,7 @@
                                 <label class="col-sm-3 control-label">Especialidad</label>
                                 <div class="col-sm-9">
                                     <select class="custom-select" name="cboespecialidad" id="cboespecialidad">
-                                        <option th:each="especialidad : ${especialidades}" th:value="${esp.id}" th:text="${esp.descripcion}"></option>
+                                        <option th:each="especialidad : ${especialidades}" th:value="${especialidad.id}" th:text="${especialidad.descripcion}"></option>
                                     </select>
                                 </div>
                             </div>  
