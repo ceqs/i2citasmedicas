@@ -15,7 +15,6 @@ public class HistorialController {
 	@RequestMapping("/historial")
 	public String showHistorial(Model model) {
 		model.addAttribute("especialidades", especialidadServiceAPI.getAll());
-
 		return "historial";
 	}
 }

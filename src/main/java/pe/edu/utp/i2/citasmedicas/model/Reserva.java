@@ -1,5 +1,7 @@
 package pe.edu.utp.i2.citasmedicas.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -27,6 +29,7 @@ public class Reserva {
     private Instant fhFin;
 
     @Column(name = "fecha_cita", nullable = false)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate fechaCita;
 
     @Column(name = "tipo_cita", nullable = false, length = 50)
