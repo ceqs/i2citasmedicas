@@ -26,8 +26,16 @@ where c.fecha between fecI and fecF
 	and m.idEspecialidad = IFNULL(idEsp,  m.idEspecialidad)
     and c.idPaciente = IFNULL(idPac, c.idPaciente);
 
+@Query(value = "SELECT * FROM reserva r INNER JOIN medicos m on r.id_medico = m.id_medico WHERE r.fecha_cita between :start and :end and r.id_medico = :cmed and m.id_esp = :cesp",
+           nativeQuery = true)
 * */
-    @Query(value = "SELECT * FROM reserva r INNER JOIN medicos m on r.id_medico = m.id_medico WHERE r.fecha_cita between :start and :end and r.id_medico = :cmed and m.id_esp = :cesp",
+    //MTC(04/11/2022)
+    @Query(value = "SELECT * FROM reserva r \n" +
+            " INNER JOIN medicos m on r.id_medico = m.id_medico \n" +
+            " WHERE r.fecha_cita between :start and :end \n" +
+            " and r.id_medico = case when :cmed = 0 then r.id_medico else :cmed end \n" +
+            " and m.id_esp = case when :cesp = 0 then m.id_esp else :cesp end",
            nativeQuery = true)
     List<Reserva> findReservasByFechasEspMed(@Param("start") String start, @Param("end") String end, @Param("cesp") String cesp, @Param("cmed") Integer cmed);
+
 }

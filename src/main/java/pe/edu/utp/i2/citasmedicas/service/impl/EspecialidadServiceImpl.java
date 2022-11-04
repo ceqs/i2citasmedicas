@@ -6,7 +6,10 @@ import org.springframework.stereotype.Service;
 import pe.edu.utp.i2.citasmedicas.commons.GenericServiceImpl;
 import pe.edu.utp.i2.citasmedicas.dao.api.EspecialidadDaoAPI;
 import pe.edu.utp.i2.citasmedicas.model.Especialidad;
+import pe.edu.utp.i2.citasmedicas.model.Reserva;
 import pe.edu.utp.i2.citasmedicas.service.api.EspecialidadServiceAPI;
+
+import java.util.List;
 
 @Service
 public class EspecialidadServiceImpl extends GenericServiceImpl<Especialidad, Integer> implements EspecialidadServiceAPI {

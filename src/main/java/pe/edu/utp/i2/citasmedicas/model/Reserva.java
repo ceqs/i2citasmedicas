@@ -101,4 +101,21 @@ public class Reserva {
     public void setId(Integer id) {
         this.id = id;
     }
+
+/*
+    //MTC
+    private int mes;
+    private double total;
+    private String nameM;
+
+    public int getMes() { return mes; }
+    public void setMes(int mes) { this.mes = mes; }
+    public double getTotal() { return total; }
+    public void setTotal(double total) { this.total = total; }
+    public String getNameM() { return nameM; }
+    public void setNameM(String nameM) { this.nameM = nameM; }
+
+ */
+
+
 }

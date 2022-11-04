@@ -29,6 +29,9 @@
                 <li th:if="${role.isAdmin() == true}">
                     <a class="menu-options" th:href="@{/historial}">Historial</a>
                 </li>
+				<li th:if="${role.isAdmin() == true}">
+					<a class="menu-options" th:href="@{/grafico}">Graficos</a>
+				</li>
                 <li th:if="${role.isAdmin() == true}">
                     <a class="menu-options" href="Grafico.jsp">Dashboard</a>
                 </li>
