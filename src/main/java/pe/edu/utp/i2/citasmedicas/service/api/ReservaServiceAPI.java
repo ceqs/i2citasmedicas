@@ -4,5 +4,5 @@ import pe.edu.utp.i2.citasmedicas.commons.GenericServiceAPI;
 import pe.edu.utp.i2.citasmedicas.model.Reserva;
 
 public interface ReservaServiceAPI extends GenericServiceAPI<Reserva, Integer> {
-	
+    void sendEmail(String fecha, String horario, String medico, String receptor);
 }

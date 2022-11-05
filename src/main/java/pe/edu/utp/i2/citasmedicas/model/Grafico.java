@@ -5,12 +5,8 @@ import javax.persistence.*;
 @Entity
 public class Grafico {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
-
-
-
 
     private int mes;
     private double total;
