@@ -40,9 +40,6 @@ public class ReservaApiController {
 
 	@PostMapping(value = "/reservas")
 	public ResponseEntity<Reserva> save(@RequestBody Reserva reserva) {
-		Instant lt = Instant.now();
-		reserva.setFhFin(lt);
-		reserva.setFhInicio(lt);
 		reserva.setTipoCita("PRESENCIAL");
 		reserva.setTipoSeguro("EPS");
 		Reserva obj = reservaServiceAPI.save(reserva);

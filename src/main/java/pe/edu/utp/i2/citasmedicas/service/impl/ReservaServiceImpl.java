@@ -14,6 +14,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Properties;
 
 @Service
@@ -60,5 +62,10 @@ public class ReservaServiceImpl extends GenericServiceImpl<Reserva, Integer> imp
 		catch (MessagingException me) {
 			me.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<Reserva> searchReservasPorFechas(Integer idMedico, LocalDate start, LocalDate end) {
+		return reservaDaoAPI.findByMedicoIdAndFechaCitaBetween(idMedico, start, end);
 	}
 }

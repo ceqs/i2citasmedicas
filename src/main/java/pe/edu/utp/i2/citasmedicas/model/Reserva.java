@@ -1,10 +1,11 @@
 package pe.edu.utp.i2.citasmedicas.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reserva")
@@ -23,13 +24,15 @@ public class Reserva {
     private Medico medico;
 
     @Column(name = "fh_inicio", nullable = false)
-    private Instant fhInicio;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime fhInicio;
 
     @Column(name = "fh_fin", nullable = false)
-    private Instant fhFin;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime fhFin;
 
     @Column(name = "fecha_cita", nullable = false)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate fechaCita;
 
     @Column(name = "tipo_cita", nullable = false, length = 50)
@@ -62,19 +65,19 @@ public class Reserva {
         this.fechaCita = fechaCita;
     }
 
-    public Instant getFhFin() {
+    public LocalDateTime getFhFin() {
         return fhFin;
     }
 
-    public void setFhFin(Instant fhFin) {
+    public void setFhFin(LocalDateTime fhFin) {
         this.fhFin = fhFin;
     }
 
-    public Instant getFhInicio() {
+    public LocalDateTime getFhInicio() {
         return fhInicio;
     }
 
-    public void setFhInicio(Instant fhInicio) {
+    public void setFhInicio(LocalDateTime fhInicio) {
         this.fhInicio = fhInicio;
     }
 

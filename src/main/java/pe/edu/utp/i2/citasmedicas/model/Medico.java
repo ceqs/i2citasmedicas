@@ -1,5 +1,7 @@
 package pe.edu.utp.i2.citasmedicas.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -21,6 +23,7 @@ public class Medico {
     private String sexo;
 
     @Column(name = "fec_nac")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate fecNac;
 
     @Column(name = "dni", length = 8)

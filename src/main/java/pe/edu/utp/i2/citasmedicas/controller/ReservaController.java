@@ -7,9 +7,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pe.edu.utp.i2.citasmedicas.model.Paciente;
 import pe.edu.utp.i2.citasmedicas.service.api.EspecialidadServiceAPI;
 import pe.edu.utp.i2.citasmedicas.service.api.PacienteServiceAPI;
 import pe.edu.utp.i2.citasmedicas.service.api.MedicoServiceAPI;
@@ -34,12 +37,16 @@ public class ReservaController {
 
 	@RequestMapping("/reserva")
 	public String index(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth != null) {
+			Paciente paciente = pacienteServiceAPI.findByUsuario(auth.getName());
+			model.addAttribute("paciente", paciente.getNombres() + " " + paciente.getApePaterno() + " " + paciente.getApeMaterno());
+		}
+
 		model.addAttribute("pacientes", pacienteServiceAPI.getAll());
 		model.addAttribute("especialidades", especialidadServiceAPI.getAll());
 		model.addAttribute("medicos", medicoServiceAPI.getAll());
 		model.addAttribute("horarios", horarioServiceAPI.getAll());
 		return "reserva";
 	}
-
-
 }

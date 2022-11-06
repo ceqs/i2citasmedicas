@@ -1,8 +1,11 @@
 package pe.edu.utp.i2.citasmedicas.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "horarios")
@@ -17,13 +20,16 @@ public class Horario {
     private Medico medico;
 
     @Column(name = "fecha", nullable = false)
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate fecha;
 
     @Column(name = "hora_inicio", nullable = false)
-    private Instant horaInicio;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime horaInicio;
 
     @Column(name = "hora_fin", nullable = false)
-    private Instant horaFin;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime horaFin;
 
     @Column(name = "estado", nullable = false, length = 50)
     private String estado;
@@ -36,19 +42,19 @@ public class Horario {
         this.estado = estado;
     }
 
-    public Instant getHoraFin() {
+    public LocalDateTime getHoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(Instant horaFin) {
+    public void setHoraFin(LocalDateTime horaFin) {
         this.horaFin = horaFin;
     }
 
-    public Instant getHoraInicio() {
+    public LocalDateTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Instant horaInicio) {
+    public void setHoraInicio(LocalDateTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 

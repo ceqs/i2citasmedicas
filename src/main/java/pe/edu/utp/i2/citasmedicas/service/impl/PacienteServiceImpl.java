@@ -20,4 +20,9 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente, Integer> i
 		return pacienteDaoAPI;
 	}
 
+
+	@Override
+	public Paciente findByUsuario(String usuario) {
+		return pacienteDaoAPI.findByUsuarioUsuario(usuario);
+	}
 }
