@@ -29,4 +29,18 @@ public interface GraficoDaoAPI extends CrudRepository<Grafico, Integer> {
             nativeQuery = true)
     List<Grafico> findCountReservasByAnio(@Param("anio") Integer anio);
 
+
+    @Query(value = "select \n" +
+            "r.id_medico as id,\n" +
+            "r.id_medico as mes, \n" +
+            "count(*) as total,\n" +
+            "left(concat(m.apellidos,' ',m.nombres),20) as nameM \n" +
+            "from reserva r\n" +
+            "inner join medicos m on r.id_medico=m.id_medico \n" +
+            "where year(fecha_cita) = :anio \n" +
+            "group by mes, nameM \n" +
+            "order by 3 desc, 4 asc limit 10;",
+            nativeQuery = true)
+    List<Grafico> findCountReservasByAnioByMed(@Param("anio") Integer anio);
+
 }

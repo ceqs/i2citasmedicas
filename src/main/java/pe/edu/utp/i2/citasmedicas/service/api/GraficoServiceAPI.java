@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface GraficoServiceAPI extends GenericServiceAPI<Reserva, Integer> {
     public List<Grafico> findCountReservasByAnio(Integer anio);
+
+    public List<Grafico> findCountReservasByAnioByMed(Integer anio);
 }

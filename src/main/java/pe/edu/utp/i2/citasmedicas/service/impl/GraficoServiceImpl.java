@@ -22,6 +22,10 @@ public class GraficoServiceImpl extends GenericServiceImpl<Reserva, Integer> imp
         return graficoDaoAPI.findCountReservasByAnio(anio);
     }
 
+    @Override
+    public List<Grafico> findCountReservasByAnioByMed(Integer anio) {
+        return graficoDaoAPI.findCountReservasByAnioByMed(anio);
+    }
 
     @Override
     public CrudRepository<Reserva, Integer> getDao() {

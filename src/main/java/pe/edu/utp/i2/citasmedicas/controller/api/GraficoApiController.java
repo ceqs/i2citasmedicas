@@ -22,4 +22,10 @@ public class GraficoApiController {
         return graficoServiceAPI.findCountReservasByAnio(Integer.parseInt(anio));
     }
 
+    @GetMapping(value = "/graficosM")
+    public List<Grafico> getByCountAnioByMed(@RequestParam String anio) {
+        System.out.println("entro al metodo");
+        return graficoServiceAPI.findCountReservasByAnioByMed(Integer.parseInt(anio));
+    }
+
 }

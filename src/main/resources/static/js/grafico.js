@@ -1,4 +1,5 @@
  let myChart=null;
+ let myChartM=null;
 
 $(document).ready(function () {
 
@@ -13,10 +14,15 @@ $(document).ready(function () {
         //alert("OK: " + txtI + '|' + txtF + '|' + cboE + '|' + cboM);
 
         document.getElementById("myChartX").style.display = "none";
+        document.getElementById("myChartM").style.display = "none";
         document.getElementById("divMessage").style.display = "none";
 
         $.getJSON("/v2/graficos", { anio: txtI },function (response) {
             getDataListado(response);
+        });
+
+        $.getJSON("/v2/graficosM", { anio: txtI },function (response) {
+            getDataListadoMed(response);
         });
 
     });
@@ -26,9 +32,8 @@ $(document).ready(function () {
 
 function getDataListado(response) {
     //JSON.parse(response
- console.log(response);
+    console.log(response);
     var lista = response;
-    console.log(lista);
     if (lista.length > 0){
         document.getElementById("myChartX").style.display = "block";
         setTypeChartControl(lista);
@@ -37,8 +42,18 @@ function getDataListado(response) {
     }
 }
 
+function getDataListadoMed(response) {
+    //JSON.parse(response
+    console.log(response);
+    var lista = response;
+    if (lista.length > 0){
+        document.getElementById("myChartM").style.display = "block";
+        setTypeChartControlMed(lista);
+    }
+}
+
 function setTypeChartControl(lista){
-    let ntype = form_grafico.tipo.value;
+    let ntype = "line";     //form_grafico.tipo.value;
     let ctx = document.getElementById('myChartX').getContext('2d');
     if (myChart) {
         myChart.destroy();
@@ -47,7 +62,7 @@ function setTypeChartControl(lista){
     type: ntype,
     data: {
         datasets: [{
-            label: 'Total Atenciones',
+            label: 'Total Atenciones por Año',
             backgroundColor: [
                 '#FAEBD7',
                 '#DCDCDC',
@@ -77,4 +92,47 @@ function setTypeChartControl(lista){
         myChart.data['datasets'][0].data.push(lista[i].total);
     }
     myChart.update();
+}
+
+
+function setTypeChartControlMed(lista){
+    let ntype = "bar";     //form_grafico.tipo.value;
+    let ctx = document.getElementById('myChartM').getContext('2d');
+    if (myChartM) {
+        myChartM.destroy();
+    }
+    myChartM = new Chart(ctx, {
+    type: ntype,
+    data: {
+        datasets: [{
+            label: 'Total Atenciones por Médico',
+            backgroundColor: [
+                '#FAEBD7',
+                '#DCDCDC',
+                '#E9967A',
+                '#F5DEB3',
+                '#9ACD32',
+                '#E9DAC6'
+            ],
+            borderColor: ['black'],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        "responsive": false,
+        "maintainAspectRatio": true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+    //carga data
+    for (var i = 0; i < lista.length; i++) {
+        myChartM.data['labels'].push(lista[i].nameM);
+        myChartM.data['datasets'][0].data.push(lista[i].total);
+    }
+    myChartM.update();
 }
