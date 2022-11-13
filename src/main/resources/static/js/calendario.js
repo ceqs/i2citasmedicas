@@ -14,29 +14,18 @@ $(document).ready(function () {
             right: 'timeGridWeek,timeGridDay'
           },
           eventClick: function(arg) {
-            if(arg.event.title != "RESERVADO") {
-                if (confirm('Desea realizar la cita?')) {
-                    var reserva = {
-                        paciente: {
-                            id: $('#cboPaciente').val()
-                        },
-                        medico: {
-                            id: $('#cboMedico').val()
-                        },
-                        fechaCita: $("#txtfechaI").val(),
-                        fhInicio: arg.event.extendedProps.startStr,
-                        fhFin: arg.event.extendedProps.endStr
-                    };
+            if(arg.event.title == "RESERVADO") {
+                if (confirm('Desea anular la cita?')) {
                     $.ajax({
-                      url:"/v1/reservas",
-                      type:"POST",
-                      data:JSON.stringify(reserva),
+                      url:"/v1/reservas/" + arg.event.extendedProps.idCita,
+                      type:"DELETE",
                       contentType:"application/json; charset=utf-8",
                       dataType:"json",
                       success: function(response){
-                          arg.event.title = "RESERVADO";
-                          arg.event.backgroundColor = "#cd5c5c";
-                          alert("Cita registrada con ticket:" + response.id);
+                          arg.event.title = "LIBERADO";
+                          arg.event.backgroundColor = "#32cd32";
+                          alert("Cita con ticket " + arg.event.extendedProps.idCita + " fue anulada.");
+                          $('#btnBuscar').trigger('click');
                       }
                     });
                 }

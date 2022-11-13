@@ -37,6 +37,7 @@ $(document).ready(function () {
                           arg.event.title = "RESERVADO";
                           arg.event.backgroundColor = "#cd5c5c";
                           alert("Cita registrada con ticket:" + response.id);
+                          $('#btnBuscar').trigger('click');
                       }
                     });
                 }
@@ -83,8 +84,6 @@ $(document).ready(function () {
             calendar.addEventSource(response);
             calendar.gotoDate($("#txtfechaI").val());
         });
-
-
     });
 
     $("#cboEspecial").change(function () {

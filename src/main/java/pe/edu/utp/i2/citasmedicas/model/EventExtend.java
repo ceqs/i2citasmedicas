@@ -1,9 +1,18 @@
 package pe.edu.utp.i2.citasmedicas.model;
 
 public class EventExtend {
+    private Integer idCita;
     private String startStr;
 
     private String endStr;
+
+    public Integer getIdCita() {
+        return idCita;
+    }
+
+    public void setIdCita(Integer idCita) {
+        this.idCita = idCita;
+    }
 
     public String getStartStr() {
         return startStr;

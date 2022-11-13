@@ -90,31 +90,32 @@ public class HorarioApiController {
 		for(Horario horario: lsHorarios) {
 			Event event = new Event();
 			event.setStart(horario.getHoraInicio());
-			event.getExtendedProps().setStartStr(horario.getHoraInicio().format(dateTimeFormatter));
 			event.setEnd(horario.getHoraFin());
+			event.getExtendedProps().setStartStr(horario.getHoraInicio().format(dateTimeFormatter));
 			event.getExtendedProps().setEndStr(horario.getHoraFin().format(dateTimeFormatter));
-			event.setTitle("DISPONIBLE");
+			event.setTitle(horario.getEstado()); // DISPONIBLE
+			// Si el rol es paciente entonces el horario es disponible, sino el horario es el lo que indica el estado.
 			event.setBackgroundColor("#32cd32");
 			hevents.put(horario.getHoraInicio(), event);
 		}
 
 		for(Reserva reserva: lsReserva) {
+			Event event = new Event();
 			if(hevents.containsKey(reserva.getFhInicio())) {
-				Event e = hevents.get(reserva.getFhInicio());
-				e.setBackgroundColor("#cd5c5c");
-				e.setTitle("RESERVADO");
-				hevents.put(reserva.getFhInicio(), e);
+				event = hevents.get(reserva.getFhInicio());
+
 			}
 			else {
-				Event event = new Event();
 				event.setStart(reserva.getFhInicio());
-				event.getExtendedProps().setStartStr(reserva.getFhInicio().format(dateTimeFormatter));
 				event.setEnd(reserva.getFhFin());
+				event.getExtendedProps().setStartStr(reserva.getFhInicio().format(dateTimeFormatter));
 				event.getExtendedProps().setEndStr(reserva.getFhFin().format(dateTimeFormatter));
-				event.setTitle("RESERVADO");
-				event.setBackgroundColor("#cd5c5c");
-				hevents.put(reserva.getFhInicio(), event);
 			}
+
+			event.setBackgroundColor("#cd5c5c");
+			event.setTitle("RESERVADO");
+			event.getExtendedProps().setIdCita(reserva.getId());
+			hevents.put(reserva.getFhInicio(), event);
 		}
 
 		List<Event> events = new ArrayList<>(hevents.values());

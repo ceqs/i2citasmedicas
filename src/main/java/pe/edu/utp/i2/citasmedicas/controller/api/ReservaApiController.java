@@ -50,7 +50,7 @@ public class ReservaApiController {
 		return new ResponseEntity<>(obj, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/reservas/{id}", method = RequestMethod.DELETE)
+	@DeleteMapping(value = "/reservas/{id}")
 	public ResponseEntity<Reserva> delete(@PathVariable Integer id) {
 		Reserva reserva = reservaServiceAPI.get(id);
 		if (reserva != null) {
