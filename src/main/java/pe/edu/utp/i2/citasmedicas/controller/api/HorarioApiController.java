@@ -16,10 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/v1")
@@ -61,22 +58,32 @@ public class HorarioApiController {
 	}
 
 	@GetMapping(value = "/horarios/search")
-	public Events getById(@RequestParam Integer medico, @RequestParam String fecha) {
-		if(fecha.isEmpty()) return new Events();
-
+	public Events searchEventos(@RequestParam Integer medico, @RequestParam String fechaInicio, @RequestParam Optional<String> fechaFin) {
+		if(fechaInicio.isEmpty()) return new Events();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate localDate = LocalDate.parse(fecha, formatter);
 
-		LocalDate monday = localDate;
-		if(localDate.getDayOfWeek() != DayOfWeek.MONDAY) {
-			monday = localDate.with(TemporalAdjusters.previous(DayOfWeek.MONDAY));
+		if(fechaFin.isPresent()) {
+			return searchHorariosAndEventos(medico, LocalDate.parse(fechaInicio, formatter), LocalDate.parse(fechaFin.get(), formatter));
 		}
+		else {
+			LocalDate localDate = LocalDate.parse(fechaInicio, formatter);
+			LocalDate monday = localDate;
 
-		LocalDate sunday = monday.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
-		System.out.println(monday);
-		System.out.println(sunday);
-		List<Horario> lsHorarios = horarioServiceAPI.searchHorarios(medico, monday, sunday);
-		List<Reserva> lsReserva = reservaServiceAPI.searchReservasPorFechas(medico, monday, sunday);
+			if(localDate.getDayOfWeek() != DayOfWeek.MONDAY) {
+				monday = localDate.with(TemporalAdjusters.previous(DayOfWeek.MONDAY));
+			}
+
+			LocalDate sunday = monday.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+
+			System.out.println(monday + " - " + sunday);
+
+			return searchHorariosAndEventos(medico, monday, sunday);
+		}
+	}
+
+	private Events searchHorariosAndEventos(Integer medico, LocalDate start, LocalDate end) {
+		List<Horario> lsHorarios = horarioServiceAPI.searchHorarios(medico, start, end);
+		List<Reserva> lsReserva = reservaServiceAPI.searchReservasPorFechas(medico, start, end);
 
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		Map<LocalDateTime, Event> hevents = new HashMap<>();
@@ -109,6 +116,7 @@ public class HorarioApiController {
 				hevents.put(reserva.getFhInicio(), event);
 			}
 		}
+
 		List<Event> events = new ArrayList<>(hevents.values());
 		Events obj = new Events();
 		obj.setEvents(events);

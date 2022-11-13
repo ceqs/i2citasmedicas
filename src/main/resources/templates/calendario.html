@@ -9,7 +9,7 @@
         <script src="../static/js/jquery.min.js" crossorigin="anonymous" th:src="@{/js/jquery.min.js}"></script>
         <script src="../static/js/fullcalendar/main.min.js" crossorigin="anonymous" th:src="@{/js/fullcalendar/main.min.js}"></script>
         <script src="../static/js/fullcalendar/locales-all.min.js" crossorigin="anonymous" th:src="@{/js/fullcalendar/locales-all.min.js}"></script>
-        <script src="../static/js/reserva.js" crossorigin="anonymous" th:src="@{/js/reserva.js}"></script>
+        <script src="../static/js/calendario.js" crossorigin="anonymous" th:src="@{/js/calendario.js}"></script>
     </head>
     <body>
         <section id="main-content">
@@ -20,47 +20,28 @@
                             <div class="row d-flex justify-content-center">
                                 <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
                                     <div class="card" style="padding:10px">
-                                        <h4>Reserva de Citas</h4>
+                                        <h4>Calendario de citas por medico</h4>
                                         <br>
                                         <form name="form_historial" id="form_historial" style="width: 100%;">
                                             <div class="form-group row rowT">
-                                                <div class="col-lg-12 row mb-3">
-                                                    <label class="col-sm-3 control-label">Tipo de Atención</label>
-                                                    <div class="col-sm-9">
-                                                        <select class="form-select" name="cboTipoAtencion" id="cboTipoAtencion">
-                                                            <option value="PRESENCIAL" selected>Presencial</option>
-                                                            <option value="VIRTUAL">Telemedicina</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 row mb-3">
-                                                    <label class="col-sm-3 control-label">Paciente</label>
-                                                    <div class="col-sm-9">
-                                                        <select class="form-select" name="cboPaciente" id="cboPaciente">
-                                                            <option selected th:each="paciente : ${pacientes}" th:value="${paciente.id}" th:text="${paciente.nombres}"></option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 row mb-3">
-                                                    <label class="col-sm-3 control-label">Fecha Inicio</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="date" th:attr="min=${today}" max="2050-12-31" class="form-control" name="txtfechaI" id="txtfechaI">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 row mb-3">
-                                                    <label for="cboEspecial" class="col-sm-3 col-form-label">Especialidad</label>
-                                                    <div class="col-sm-9">
-                                                        <select class="form-select" name="cboEspecial" id="cboEspecial">
-                                                            <option th:each="especialidad : ${especialidades}" th:value="${especialidad.id}" th:text="${especialidad.descripcion}"></option>
-                                                        </select>
-                                                    </div>
-                                                </div>
                                                 <div class="col-lg-12 row mb-3">
                                                     <label for="cboMedico" class="col-sm-3 col-form-label">Medico</label>
                                                     <div class="col-sm-9">
                                                         <select class="form-select" name="cboMedico" id="cboMedico">
                                                             <option th:each="medico : ${medicos}" th:value="${medico.id}" th:text="${medico.nombres}"></option>
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 row mb-3">
+                                                    <label class="col-sm-3 control-label">Fecha Inicio</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="date" min="1920-01-01" max="2050-12-31" class="form-control" name="txtfechaI" id="txtfechaI">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 row mb-3">
+                                                    <label class="col-sm-3 control-label">Fecha Fin</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="date" min="1920-01-01" max="2050-12-31" class="form-control" name="txtfechaF" id="txtfechaF">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 row mb-3">

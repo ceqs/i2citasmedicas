@@ -30,11 +30,11 @@
                     <a class="menu-options" th:href="@{/historial}">Historial</a>
                 </li>
 				<li th:if="${role.isAdmin() == true}">
-					<a class="menu-options" th:href="@{/grafico}">Graficos</a>
+					<a class="menu-options" th:href="@{/grafico}">Dashboard</a>
 				</li>
-                <li th:if="${role.isAdmin() == true}">
-                    <a class="menu-options" href="Grafico.jsp">Dashboard</a>
-                </li>
+				<li th:if="${role.isAdmin() == true}">
+					<a class="menu-options" th:href="@{/calendario}">Calendario</a>
+				</li>
 				<li th:if="${role.isAdmin() == true}">
                     <a href="#adminSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Administración</a>
                     <ul class="collapse list-unstyled" id="adminSubmenu" data-bs-target="#adminSubmenu">

@@ -4,7 +4,7 @@ $(document).ready(function () {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialDate: '2020-09-12',
+          initialDate: '2022-11-01',
           initialView: 'timeGridWeek',
           locale: initialLocaleCode,
           nowIndicator: true,
@@ -54,22 +54,16 @@ $(document).ready(function () {
         calendar.today();
 
     $("#btnBuscar").click(function () {
-        //valida
         let txtI = form_historial.txtfechaI.value;
-        //let txtF = form_historial.txtfechaF.value;
-        let cboE = form_historial.cboEspecial.value;
-        let cboM = form_historial.cboMedico.value;
+        let txtF = form_historial.txtfechaF.value;
 
         if (txtI == null || txtI == "") {
             alert("Debe especificar fecha Inicio");
             return;
         }
-        if (cboE == 0) {
-            alert("Debe seleccionar una Especialidad");
-            return;
-        }
-        if (cboM == 0) {
-            alert("Debe seleccionar un Medico");
+
+        if (txtF == null || txtF == "") {
+            alert("Debe especificar fecha Fin");
             return;
         }
 
@@ -79,12 +73,10 @@ $(document).ready(function () {
             eventSources[i].remove();
         }
 
-        $.getJSON('/v1/horarios/search?medico='+$('#cboMedico').val()+'&fechaInicio='+$("#txtfechaI").val(), function (response) {
+        $.getJSON('/v1/horarios/search?medico='+$('#cboMedico').val()+'&fechaInicio='+$("#txtfechaI").val()+'&fechaFin='+$("#txtfechaF").val(), function (response) {
             calendar.addEventSource(response);
             calendar.gotoDate($("#txtfechaI").val());
         });
-
-
     });
 
     $("#cboEspecial").change(function () {

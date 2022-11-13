@@ -18,6 +18,8 @@ import pe.edu.utp.i2.citasmedicas.service.api.PacienteServiceAPI;
 import pe.edu.utp.i2.citasmedicas.service.api.MedicoServiceAPI;
 import pe.edu.utp.i2.citasmedicas.service.api.HorarioServiceAPI;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 @Controller
@@ -43,6 +45,8 @@ public class ReservaController {
 			model.addAttribute("paciente", paciente.getNombres() + " " + paciente.getApePaterno() + " " + paciente.getApeMaterno());
 		}
 
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		model.addAttribute("today", LocalDate.now().format(formatter));
 		model.addAttribute("pacientes", pacienteServiceAPI.getAll());
 		model.addAttribute("especialidades", especialidadServiceAPI.getAll());
 		model.addAttribute("medicos", medicoServiceAPI.getAll());
