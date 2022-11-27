@@ -9,6 +9,7 @@ import pe.edu.utp.i2.citasmedicas.model.Horario;
 import pe.edu.utp.i2.citasmedicas.service.api.HorarioServiceAPI;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -25,5 +26,10 @@ public class HorarioServiceImpl extends GenericServiceImpl<Horario, Integer> imp
 	@Override
 	public List<Horario> searchHorarios(Integer idMedico, LocalDate start, LocalDate end) {
 		return horarioDaoAPI.findByMedicoIdAndFechaBetween(idMedico, start, end);
+	}
+
+	@Override
+	public Horario searchHorarioByFechas(Integer idMedico, LocalDateTime horaInicio, LocalDateTime horaFin) {
+		return horarioDaoAPI.findByMedicoIdAndHoraInicioAndHoraFin(idMedico, horaInicio, horaFin);
 	}
 }
