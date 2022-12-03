@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.utp.i2.citasmedicas.model.Event;
-import pe.edu.utp.i2.citasmedicas.model.Events;
-import pe.edu.utp.i2.citasmedicas.model.Horario;
-import pe.edu.utp.i2.citasmedicas.model.Reserva;
+import pe.edu.utp.i2.citasmedicas.model.*;
 import pe.edu.utp.i2.citasmedicas.service.api.HorarioServiceAPI;
 import pe.edu.utp.i2.citasmedicas.service.api.ReservaServiceAPI;
 
@@ -15,6 +12,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
@@ -43,6 +41,42 @@ public class HorarioApiController {
 	public ResponseEntity<Horario> save(@RequestBody Horario horario) {
 		Horario obj = horarioServiceAPI.save(horario);
 		return new ResponseEntity<Horario>(obj, HttpStatus.OK);
+	}
+
+	@PostMapping(value = "/horarios/group")
+	public ResponseEntity<List<Horario>> saveGroup(@RequestBody Programacion programacion) {
+		List<Horario> horarios = new ArrayList<>();
+		LocalDateTime start = programacion.getStart();
+		System.out.println(start);
+		LocalDateTime end = programacion.getEnd();
+		System.out.println(end);
+		LocalDateTime next = start.plus(15, ChronoUnit.MINUTES);
+		do {
+			Horario horario = new Horario();
+			horario.setMedico(programacion.getMedico());
+			horario.setFecha(start.toLocalDate());
+			horario.setEstado("DISPONIBLE");
+			horario.setHoraInicio(start);
+			horario.setHoraFin(next);
+			start = next;
+			next = start.plus(15, ChronoUnit.MINUTES);
+
+			Horario programado = horarioServiceAPI.searchHorarioByFechas(horario.getMedico().getId(), horario.getHoraInicio(), horario.getHoraFin());
+			if(programado == null) {
+				horarios.add(horario);
+			}
+			else {
+				System.out.println("Se descarta el horario: " + horario);
+			}
+			System.out.println(end);
+			System.out.println(next);
+		} while(end.isAfter(start));
+
+		horarios.stream().forEach((h) -> {
+			horarioServiceAPI.save(h);
+		});
+
+		return new ResponseEntity<List<Horario>>(horarios, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/horarios/{id}", method = RequestMethod.DELETE)

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pe.edu.utp.i2.citasmedicas.commons.PasswordValidator;
 import pe.edu.utp.i2.citasmedicas.model.Paciente;
 import pe.edu.utp.i2.citasmedicas.model.Registro;
 import pe.edu.utp.i2.citasmedicas.model.Rol;
@@ -40,6 +41,9 @@ public class RegistroController {
 		try {
 			Usuario utmp = usuarioServiceAPI.get(registro.getUsuario().getUsuario());
 			if(utmp == null) {
+				if(!PasswordValidator.isValid(registro.getUsuario().getPassword())) {
+					throw new RuntimeException("La contraseña debe contener al menos un dígito [0-9], al menos un carácter en minúscula [a-z], al menos un carácter en mayúscula [A-Z], al menos un carácter especial y una longitud al menos 8 caracteres");
+				}
 				Rol rol = rolServiceAPI.get(Rol.PACIENTE);
 				registro.getUsuario().setRol(rol);
 				BCryptPasswordEncoder passGen = new BCryptPasswordEncoder();
@@ -47,6 +51,9 @@ public class RegistroController {
 				registro.getUsuario().setEnabled(true);
 				Usuario usuario = usuarioServiceAPI.save(registro.getUsuario());
 				registro.getPaciente().setUsuario(usuario);
+				registro.getPaciente().setApePaterno(capitalize(registro.getPaciente().getApePaterno()));
+				registro.getPaciente().setApeMaterno(capitalize(registro.getPaciente().getApeMaterno()));
+				registro.getPaciente().setNombres(capitalize(registro.getPaciente().getNombres()));
 				pacienteServiceAPI.save(registro.getPaciente());
 				registro.setPaciente(new Paciente());
 				registro.setUsuario(new Usuario());
@@ -63,5 +70,13 @@ public class RegistroController {
 			model.addAttribute("error", "No se pudo registrar el usuario.");
 		}
 		return "registro";
+	}
+
+	public static String capitalize(String str) {
+		if(str == null || str.isEmpty()) {
+			return str;
+		}
+
+		return str.substring(0, 1).toUpperCase() + str.substring(1);
 	}
 }

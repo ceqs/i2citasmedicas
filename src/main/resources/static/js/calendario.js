@@ -8,6 +8,14 @@ $(document).ready(function () {
           initialView: 'timeGridWeek',
           locale: initialLocaleCode,
           nowIndicator: true,
+          slotDuration: '00:15:00',
+          lotEventOverlap: false,
+          snapDuration: '00:15:00',
+          slotLabelFormat: {
+            hour: 'numeric',
+            minute: '2-digit',
+            omitZeroMinute: false
+          },
           headerToolbar: {
             left: 'prev,next today',
             center: 'title',
@@ -29,6 +37,9 @@ $(document).ready(function () {
                       }
                     });
                 }
+            }
+            else {
+                alert(arg);
             }
           },
           navLinks: true, // can click day/week names to navigate views
