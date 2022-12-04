@@ -45,4 +45,8 @@ public class MedicoApiController {
 		return new ResponseEntity<Medico>(medico, HttpStatus.OK);
 	}
 
+	@GetMapping(value = "/medicos/search")
+	public List<Medico> serachByEspecialidad(@RequestParam Integer especialidad) {
+		return medicoServiceAPI.searchByEspecialidad(especialidad);
+	}
 }

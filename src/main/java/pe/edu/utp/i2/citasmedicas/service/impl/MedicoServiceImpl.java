@@ -8,6 +8,8 @@ import pe.edu.utp.i2.citasmedicas.dao.api.MedicoDaoAPI;
 import pe.edu.utp.i2.citasmedicas.model.Medico;
 import pe.edu.utp.i2.citasmedicas.service.api.MedicoServiceAPI;
 
+import java.util.List;
+
 @Service
 public class MedicoServiceImpl extends GenericServiceImpl<Medico, Integer> implements MedicoServiceAPI {
 
@@ -19,4 +21,8 @@ public class MedicoServiceImpl extends GenericServiceImpl<Medico, Integer> imple
 		return medicoDaoAPI;
 	}
 
+	@Override
+	public List<Medico> searchByEspecialidad(Integer idEspecialidad) {
+		return medicoDaoAPI.findByEspecialidadId(idEspecialidad);
+	}
 }
