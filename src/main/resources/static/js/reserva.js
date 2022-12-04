@@ -34,7 +34,10 @@ $(document).ready(function () {
                         },
                         fechaCita: $("#txtfechaI").val(),
                         fhInicio: arg.event.extendedProps.startStr,
-                        fhFin: arg.event.extendedProps.endStr
+                        fhFin: arg.event.extendedProps.endStr,
+                        estado: 'RESERVADO',
+                        tipoCita: 'PRESENCIAL',
+                        tipoSeguro: 'EPS'
                     };
                     $.ajax({
                       url:"/v1/reservas",
@@ -53,8 +56,8 @@ $(document).ready(function () {
             }
           },
           navLinks: true, // can click day/week names to navigate views
-          editable: true,
-          selectable: true,
+          editable: false,
+          selectable: false,
           selectMirror: true,
           dayMaxEvents: true, // allow "more" link when too many events
           events: []

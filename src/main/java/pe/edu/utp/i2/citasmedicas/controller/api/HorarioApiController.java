@@ -3,6 +3,9 @@ package pe.edu.utp.i2.citasmedicas.controller.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.utp.i2.citasmedicas.model.*;
 import pe.edu.utp.i2.citasmedicas.service.api.HorarioServiceAPI;
@@ -120,13 +123,16 @@ public class HorarioApiController {
 		List<Reserva> lsReserva = reservaServiceAPI.searchReservasPorFechas(medico, start, end);
 
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		Map<LocalDateTime, Event> hevents = new HashMap<>();
 		for(Horario horario: lsHorarios) {
 			Event event = new Event();
 			event.setStart(horario.getHoraInicio());
 			event.setEnd(horario.getHoraFin());
+			event.getExtendedProps().setFecha(horario.getHoraInicio().format(dateFormatter));
 			event.getExtendedProps().setStartStr(horario.getHoraInicio().format(dateTimeFormatter));
 			event.getExtendedProps().setEndStr(horario.getHoraFin().format(dateTimeFormatter));
+			event.getExtendedProps().setIdHorario(horario.getId());
 			event.setTitle(horario.getEstado()); // DISPONIBLE
 			// Si el rol es paciente entonces el horario es disponible, sino el horario es el lo que indica el estado.
 			event.setBackgroundColor("#32cd32");
@@ -142,12 +148,28 @@ public class HorarioApiController {
 			else {
 				event.setStart(reserva.getFhInicio());
 				event.setEnd(reserva.getFhFin());
+				event.getExtendedProps().setFecha(reserva.getFhInicio().format(dateFormatter));
 				event.getExtendedProps().setStartStr(reserva.getFhInicio().format(dateTimeFormatter));
 				event.getExtendedProps().setEndStr(reserva.getFhFin().format(dateTimeFormatter));
 			}
 
-			event.setBackgroundColor("#cd5c5c");
-			event.setTitle("RESERVADO");
+			if(getRole().equals(Rol.ADMIN)) {
+				if(reserva.getEstado().equals("RESERVADO")) {
+					event.setBackgroundColor("#cd5c5c");
+				}
+				if(reserva.getEstado().equals("ATENDIDO")) {
+					event.setBackgroundColor("#107e05");
+				}
+				if(reserva.getEstado().equals("INASISTENCIA")) {
+					event.setBackgroundColor("#dd36da");
+				}
+				event.setTitle(reserva.getEstado());
+			}
+			else {
+				event.setBackgroundColor("#cd5c5c");
+				event.setTitle("RESERVADO");
+			}
+
 			event.getExtendedProps().setIdCita(reserva.getId());
 			hevents.put(reserva.getFhInicio(), event);
 		}
@@ -157,5 +179,14 @@ public class HorarioApiController {
 		obj.setEvents(events);
 
 		return obj;
+	}
+
+	private String getRole() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth != null) {
+			List<GrantedAuthority> authorities = (List<GrantedAuthority>) auth.getAuthorities();
+			return String.valueOf(authorities.get(0));
+		}
+		return null;
 	}
 }

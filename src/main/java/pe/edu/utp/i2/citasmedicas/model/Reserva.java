@@ -41,6 +41,9 @@ public class Reserva {
     @Column(name = "tipo_seguro", nullable = false, length = 50)
     private String tipoSeguro;
 
+    @Column(name = "estado", nullable = false, length = 50)
+    private String estado;
+
     public String getTipoSeguro() {
         return tipoSeguro;
     }
@@ -105,20 +108,11 @@ public class Reserva {
         this.id = id;
     }
 
-/*
-    //MTC
-    private int mes;
-    private double total;
-    private String nameM;
+    public String getEstado() {
+        return estado;
+    }
 
-    public int getMes() { return mes; }
-    public void setMes(int mes) { this.mes = mes; }
-    public double getTotal() { return total; }
-    public void setTotal(double total) { this.total = total; }
-    public String getNameM() { return nameM; }
-    public void setNameM(String nameM) { this.nameM = nameM; }
-
- */
-
-
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }

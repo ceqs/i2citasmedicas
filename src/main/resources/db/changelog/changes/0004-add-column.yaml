@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - comments: setup paciente rol.
+  - changeSet:
+      id: 0004-1
+      author:  ceqs (generated)
+      changes:
+        - addColumn:
+            tableName: reserva
+            columns:
+              - column:
+                  name: estado
+                  type: VARCHAR(50)

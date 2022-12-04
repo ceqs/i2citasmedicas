@@ -45,14 +45,22 @@ public class ReservaApiController {
 
 	@PostMapping(value = "/reservas")
 	public ResponseEntity<Reserva> save(@RequestBody Reserva reserva) {
-		reserva.setTipoCita("PRESENCIAL");
-		reserva.setTipoSeguro("EPS");
 		Reserva obj = reservaServiceAPI.save(reserva);
 		Medico m = medicoServiceAPI.get(reserva.getMedico().getId());
 		Paciente p = pacienteServiceAPI.get(reserva.getPaciente().getId());
 		reservaServiceAPI.sendEmail(obj.getFechaCita().toString(), obj.getFhInicio().toString(), m.getApellidos(), p.getEmail());
 
 		return new ResponseEntity<>(obj, HttpStatus.OK);
+	}
+
+	@PutMapping(value = "/reservas")
+	public ResponseEntity<Reserva> update(@RequestBody Reserva reserva) {
+		Reserva reservaTmp = reservaServiceAPI.get(reserva.getId());
+		if(reservaTmp != null) {
+			reservaTmp.setEstado(reserva.getEstado());
+			reservaTmp = reservaServiceAPI.save(reservaTmp);
+		}
+		return new ResponseEntity<>(reservaTmp, HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/reservas/{id}")
