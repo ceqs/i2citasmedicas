@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pe.edu.utp.i2.citasmedicas.commons.PasswordValidator;
@@ -37,7 +38,7 @@ public class RegistroController {
 	}
 
 	@PostMapping("/registro/guardar")
-	public String save(Registro registro, Model model) {
+	public String save(@ModelAttribute("registro") Registro registro, Model model) {
 		try {
 			Usuario utmp = usuarioServiceAPI.get(registro.getUsuario().getUsuario());
 			if(utmp == null) {

@@ -58,7 +58,7 @@ public class HorarioApiController {
 			Horario horario = new Horario();
 			horario.setMedico(programacion.getMedico());
 			horario.setFecha(start.toLocalDate());
-			horario.setEstado("DISPONIBLE");
+			horario.setEstado(EstadoCita.DISPONIBLE.toString());
 			horario.setHoraInicio(start);
 			horario.setHoraFin(next);
 			start = next;
@@ -133,9 +133,21 @@ public class HorarioApiController {
 			event.getExtendedProps().setStartStr(horario.getHoraInicio().format(dateTimeFormatter));
 			event.getExtendedProps().setEndStr(horario.getHoraFin().format(dateTimeFormatter));
 			event.getExtendedProps().setIdHorario(horario.getId());
-			event.setTitle(horario.getEstado()); // DISPONIBLE
+
 			// Si el rol es paciente entonces el horario es disponible, sino el horario es el lo que indica el estado.
-			event.setBackgroundColor("#32cd32");
+			if(getRole().equals(Rol.ADMIN)) {
+				if(horario.getEstado().equals(EstadoCita.DISPONIBLE.toString())) {
+					event.setBackgroundColor(EstadoCita.DISPONIBLE_COLOR.toString());
+				}
+				else {
+					event.setBackgroundColor(EstadoCita.LIBERADO_COLOR.toString());
+				}
+				event.setTitle(horario.getEstado());
+			}
+			else {
+				event.setTitle(EstadoCita.DISPONIBLE.toString());
+				event.setBackgroundColor(EstadoCita.DISPONIBLE_COLOR.toString());
+			}
 			hevents.put(horario.getHoraInicio(), event);
 		}
 
@@ -154,20 +166,20 @@ public class HorarioApiController {
 			}
 
 			if(getRole().equals(Rol.ADMIN)) {
-				if(reserva.getEstado().equals("RESERVADO")) {
-					event.setBackgroundColor("#cd5c5c");
+				if(reserva.getEstado().equals(EstadoCita.RESERVADO.toString())) {
+					event.setBackgroundColor(EstadoCita.RESERVADO_COLOR.toString());
 				}
-				if(reserva.getEstado().equals("ATENDIDO")) {
-					event.setBackgroundColor("#107e05");
+				if(reserva.getEstado().equals(EstadoCita.ATENDIDO.toString())) {
+					event.setBackgroundColor(EstadoCita.ATENDIDO_COLOR.toString());
 				}
-				if(reserva.getEstado().equals("INASISTENCIA")) {
-					event.setBackgroundColor("#dd36da");
+				if(reserva.getEstado().equals(EstadoCita.INASISTENCIA.toString())) {
+					event.setBackgroundColor(EstadoCita.INASISTENCIA_COLOR.toString());
 				}
 				event.setTitle(reserva.getEstado());
 			}
 			else {
-				event.setBackgroundColor("#cd5c5c");
-				event.setTitle("RESERVADO");
+				event.setBackgroundColor(EstadoCita.RESERVADO_COLOR.toString());
+				event.setTitle(EstadoCita.RESERVADO.toString());
 			}
 
 			event.getExtendedProps().setIdCita(reserva.getId());

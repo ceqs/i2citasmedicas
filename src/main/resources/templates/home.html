@@ -33,7 +33,7 @@
 					<a class="menu-options" th:href="@{/grafico}">Dashboard</a>
 				</li>
 				<li th:if="${role.isAdmin() == true}">
-					<a class="menu-options" th:href="@{/calendario}">Calendario</a>
+					<a class="menu-options" th:href="@{/calendario}">Gestión de Calendario</a>
 				</li>
 				<li th:if="${role.isAdmin() == true}">
                     <a href="#adminSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Administración</a>
@@ -45,7 +45,7 @@
                             <a class="menu-options" th:href="@{/medicos}">Medicos</a>
                         </li>
 						<li>
-							<a class="menu-options" th:href="@{/horarios}">Horarios</a>
+							<a class="menu-options" th:href="@{/horarios}">Programación de Horarios</a>
 						</li>
                     </ul>
                 </li>

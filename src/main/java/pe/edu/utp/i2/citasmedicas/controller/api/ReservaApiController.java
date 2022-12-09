@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.utp.i2.citasmedicas.model.Medico;
-import pe.edu.utp.i2.citasmedicas.model.Paciente;
-import pe.edu.utp.i2.citasmedicas.model.Reserva;
-import pe.edu.utp.i2.citasmedicas.model.Horario;
+import pe.edu.utp.i2.citasmedicas.model.*;
 import pe.edu.utp.i2.citasmedicas.service.api.HorarioServiceAPI;
 import pe.edu.utp.i2.citasmedicas.service.api.MedicoServiceAPI;
 import pe.edu.utp.i2.citasmedicas.service.api.PacienteServiceAPI;
@@ -68,7 +65,7 @@ public class ReservaApiController {
 		Reserva reserva = reservaServiceAPI.get(id);
 		if (reserva != null) {
 			Horario horario = horarioServiceAPI.searchHorarioByFechas(reserva.getMedico().getId(), reserva.getFhInicio(), reserva.getFhFin());
-			horario.setEstado("LIBERADO");
+			horario.setEstado(EstadoCita.DISPONIBLE.toString());
 			horarioServiceAPI.save(horario);
 			System.out.println(horario);
 			reservaServiceAPI.delete(id);
