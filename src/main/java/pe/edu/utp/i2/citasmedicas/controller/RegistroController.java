@@ -36,48 +36,4 @@ public class RegistroController {
 		model.addAttribute("registro", registro);
 		return "registro";
 	}
-
-	@PostMapping("/registro/guardar")
-	public String save(@ModelAttribute("registro") Registro registro, Model model) {
-		try {
-			Usuario utmp = usuarioServiceAPI.get(registro.getUsuario().getUsuario());
-			if(utmp == null) {
-				if(!PasswordValidator.isValid(registro.getUsuario().getPassword())) {
-					throw new RuntimeException("La contraseña debe contener al menos un dígito [0-9], al menos un carácter en minúscula [a-z], al menos un carácter en mayúscula [A-Z], al menos un carácter especial y una longitud al menos 8 caracteres");
-				}
-				Rol rol = rolServiceAPI.get(Rol.PACIENTE);
-				registro.getUsuario().setRol(rol);
-				BCryptPasswordEncoder passGen = new BCryptPasswordEncoder();
-				registro.getUsuario().setPassword(passGen.encode(registro.getUsuario().getPassword()));
-				registro.getUsuario().setEnabled(true);
-				Usuario usuario = usuarioServiceAPI.save(registro.getUsuario());
-				registro.getPaciente().setUsuario(usuario);
-				registro.getPaciente().setApePaterno(capitalize(registro.getPaciente().getApePaterno()));
-				registro.getPaciente().setApeMaterno(capitalize(registro.getPaciente().getApeMaterno()));
-				registro.getPaciente().setNombres(capitalize(registro.getPaciente().getNombres()));
-				pacienteServiceAPI.save(registro.getPaciente());
-				registro.setPaciente(new Paciente());
-				registro.setUsuario(new Usuario());
-				model.addAttribute("message", "OK");
-			}
-			else {
-				throw new RuntimeException("Usuario ya existe.");
-			}
-		}
-		catch(RuntimeException e) {
-			model.addAttribute("error", e.getMessage());
-		}
-		catch(Exception e) {
-			model.addAttribute("error", "No se pudo registrar el usuario.");
-		}
-		return "registro";
-	}
-
-	public static String capitalize(String str) {
-		if(str == null || str.isEmpty()) {
-			return str;
-		}
-
-		return str.substring(0, 1).toUpperCase() + str.substring(1);
-	}
 }

@@ -65,19 +65,7 @@ $(document).ready(function () {
           editable: false,
           selectable: true,
           selectMirror: true,
-          dayMaxEvents: true, // allow "more" link when too many events
-          events: [
-          {
-                    title: 'Meeting',
-                    start: '2022-11-26T12:15:00',
-                    end: '2022-11-26T12:30:00'
-                  },
-                {
-                    title: 'Meeting2',
-                    start: '2022-11-26T12:30:00',
-                    end: '2022-11-26T12:45:00'
-                  }
-          ]
+          dayMaxEvents: true
         });
 
         calendar.render();
