@@ -104,6 +104,8 @@
 
 		$(".menu-options").click(function(event) {
 			event.preventDefault();
+			$(".menu-options").removeClass('active');
+			$(this).addClass('active');
 			var href = $(this).attr('href');
 			$.get(href, function( data ) {
 				data = data.replace('/css/bootstrap.min.css', '')
