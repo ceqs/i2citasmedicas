@@ -44,17 +44,14 @@ $(document).ready(function () {
 
           },
           eventClick: function(arg) {
-            if(arg.event.title == "RESERVADO") {
-                if (confirm('Desea anular la cita?')) {
+            if(arg.event.title == "DISPONIBLE" || arg.event.title == "LIBERADO") {
+                if (confirm('Desea borrar la programación?')) {
                     $.ajax({
-                      url:"/v1/reservas/" + arg.event.extendedProps.idCita,
+                      url:"/v1/horarios/" + arg.event.extendedProps.idHorario,
                       type:"DELETE",
                       contentType:"application/json; charset=utf-8",
                       dataType:"json",
                       success: function(response){
-                          arg.event.title = "LIBERADO";
-                          arg.event.backgroundColor = "#32cd32";
-                          alert("Cita con ticket " + arg.event.extendedProps.idCita + " fue anulada.");
                           $('#btnBuscar').trigger('click');
                       }
                     });
