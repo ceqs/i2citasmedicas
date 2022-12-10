@@ -80,7 +80,7 @@ $(document).ready(function () {
                   dataType:"json",
                   success: function(response){
                       alert("Cita con ticket " + idCita + " fue anulada.");
-                      $('#modalInfoMed_moved').modal('hide');
+                      $('#modalInfoHorario_moved').modal('hide');
                       $('#btnBuscar').trigger('click');
                   }
                 });
@@ -101,15 +101,13 @@ $(document).ready(function () {
                       dataType:"json",
                       success: function(response){
                           alert("Cita con ticket " + idCita + " fue actualizada.");
-                          $('#modalInfoMed_moved').modal('hide');
+                          $('#modalInfoHorario_moved').modal('hide');
                           $('#btnBuscar').trigger('click');
                       }
                     });
             }
         }
     });
-
-    //validaCboEspecial("0");
 });
 
 function editar(arg) {
@@ -125,32 +123,15 @@ function editar(arg) {
     }
 
     jQuery.noConflict();
-    $('#modalInfoMed_moved').modal('show');
+    $('#modalInfoHorario_moved').modal('show');
 }
 
 function checkModal() {
-    if($('#modalInfoMed_moved').length) {
-        $( "#modalInfoMed" ).remove();
+    if($('#modalInfoHorario_moved').length) {
+        $( "#modalInfoHorario" ).remove();
     }
     else {
-        $('#modalInfoMed').appendTo("body");
-        $("#modalInfoMed").attr("id", "modalInfoMed_moved");
+        $("#modalInfoHorario").appendTo("body");
+        $("#modalInfoHorario").attr("id", "modalInfoHorario_moved");
     }
-}
-
-function validaCboEspecial(_id){
-    let opc = "1";
-    $.post("CitaController", {opc, _id}, function (response) {
-        getListaMedxEsp(response);
-    });
-}
-
-function getListaMedxEsp(response){
-    var lista = $.parseJSON(response);
-    var resultado = "";
-    resultado += "<option value=0 selected='selected'>(TODOS)</option>";
-    for (var i = 0; i < lista.length; i++) {
-        resultado += "<option  value=" + lista[i].idMedico + ">" + lista[i].apellidos + "</option>";
-    }
-    $("#cboMedico").html(resultado);
 }
