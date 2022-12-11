@@ -72,7 +72,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 control-label">Rol</label>
                                 <div class="col-sm-9">
-                                    <select class="custom-select" name="cborol" id="cborol_usuario">
+                                    <select class="form-select" name="cborol" id="cborol_usuario">
                                         <option th:each="rol : ${roles}" th:value="${rol.id}" th:text="${rol.nombre}"></option>
                                     </select>
                                 </div>

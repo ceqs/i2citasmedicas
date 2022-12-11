@@ -42,6 +42,7 @@ public class ReservaApiController {
 
 	@PostMapping(value = "/reservas")
 	public ResponseEntity<Reserva> save(@RequestBody Reserva reserva) {
+		reserva.setFechaCita(reserva.getFhInicio().toLocalDate());
 		Reserva obj = reservaServiceAPI.save(reserva);
 		Medico m = medicoServiceAPI.get(reserva.getMedico().getId());
 		Paciente p = pacienteServiceAPI.get(reserva.getPaciente().getId());

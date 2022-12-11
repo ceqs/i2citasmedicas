@@ -3,6 +3,7 @@ package pe.edu.utp.i2.citasmedicas.controller.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.utp.i2.citasmedicas.model.Especialidad;
 import pe.edu.utp.i2.citasmedicas.model.Usuario;
@@ -30,6 +31,16 @@ public class UsuarioApiController {
 
 	@PostMapping(value = "/usuarios")
 	public ResponseEntity<Usuario> save(@RequestBody Usuario usuario) {
+		Usuario tmp = usuarioServiceAPI.get(usuario.getUsuario());
+		BCryptPasswordEncoder passGen = new BCryptPasswordEncoder();
+		if(tmp == null) { // solo cuando es nuevo
+			usuario.setPassword(passGen.encode(usuario.getPassword()));
+		}
+		else {
+			if(!tmp.getPassword().equals(usuario.getPassword())) {
+				usuario.setPassword(passGen.encode(usuario.getPassword()));
+			}
+		}
 		Usuario obj = usuarioServiceAPI.save(usuario);
 		return new ResponseEntity<Usuario>(obj, HttpStatus.OK);
 	}

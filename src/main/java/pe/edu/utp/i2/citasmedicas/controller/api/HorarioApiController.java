@@ -103,7 +103,9 @@ public class HorarioApiController {
 			return searchHorariosAndEventos(medico, LocalDate.parse(fechaInicio, formatter), LocalDate.parse(fechaFin.get(), formatter));
 		}
 		else {
+
 			LocalDate localDate = LocalDate.parse(fechaInicio, formatter);
+			/*
 			LocalDate monday = localDate;
 
 			if(localDate.getDayOfWeek() != DayOfWeek.MONDAY) {
@@ -114,7 +116,8 @@ public class HorarioApiController {
 
 			System.out.println(monday + " - " + sunday);
 
-			return searchHorariosAndEventos(medico, monday, sunday);
+			return searchHorariosAndEventos(medico, monday, sunday);*/
+			return searchHorariosAndEventos(medico, localDate, localDate.plusYears(1));
 		}
 	}
 

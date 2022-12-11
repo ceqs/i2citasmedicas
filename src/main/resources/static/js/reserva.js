@@ -45,9 +45,8 @@ $(document).ready(function () {
                       data:JSON.stringify(reserva),
                       contentType:"application/json; charset=utf-8",
                       dataType:"json",
-                      success: function(response){
-                          arg.event.title = "RESERVADO";
-                          arg.event.backgroundColor = "#cd5c5c";
+                      success: function(response) {
+                          $("#fechaUltimaCita").val(response.fechaCita);
                           alert("Cita registrada con ticket:" + response.id);
                           $('#btnBuscar').trigger('click');
                       }
@@ -94,7 +93,13 @@ $(document).ready(function () {
 
         $.getJSON('/v1/horarios/search?medico='+$('#cboMedico').val()+'&fechaInicio='+$("#txtfechaI").val(), function (response) {
             calendar.addEventSource(response);
-            calendar.gotoDate($("#txtfechaI").val());
+            if($("#fechaUltimaCita").val() != "") {
+                calendar.gotoDate($("#fechaUltimaCita").val());
+                $("#fechaUltimaCita").val("");
+            }
+            else {
+                calendar.gotoDate($("#txtfechaI").val());
+            }
         });
     });
 

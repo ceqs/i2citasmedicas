@@ -24,6 +24,15 @@ public class UsuarioDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = usuarioDaoAPI.findByUsuario(username);
+
+		if(usuario == null) {
+			throw new UsernameNotFoundException("Usuario no existe");
+		}
+
+		if(!usuario.getEnabled()) {
+			throw new UsernameNotFoundException("Usuario desahabilitado");
+		}
+
 		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority(usuario.getRol().getId()));
 		return new User(username, usuario.getPassword(), authorities);

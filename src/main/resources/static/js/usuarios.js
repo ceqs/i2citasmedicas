@@ -12,7 +12,7 @@ function guardar() {
     var usuario = {
         usuario: $('#txtusuario_usuario').val(),
         password: $("#txtpassword_usuario").val(),
-        enabled: ($('#rdenabledsi_usuario').checked ? true: false),
+        enabled: ($('#rdenabledsi_usuario').is(':checked') ? true: false),
         rol : {
             id: $('#cborol_usuario').val()
         }
@@ -27,6 +27,10 @@ function guardar() {
       success: function() {
         $('#modal_usuario_moved').modal('hide');
         getDataListadoUsuarios();
+      },
+      error: function(e) {
+        console.log(e);
+        alert(e);
       }
     });
 }
@@ -35,8 +39,7 @@ function limpiar() {
     $('#txtusuario_usuario').val("");
     $('#txtpassword_usuario').val("");
     $('#cborol_usuario').val("");
-    $('#rdenabledsi_usuario').checked = true;
-    $('#rdenabledno_usuario').checked = false;
+    $('#rdenabledsi_usuario').prop("checked");
 }
 
 function nuevo() {
@@ -81,11 +84,17 @@ function getData(_usuario) {
         $('#txtusuario_usuario').val(response.usuario);
         $('#txtpassword_usuario').val(response.password);
         $('#cborol_usuario').val(response.rol.id);
-        
-        let benabled = (response.enabled ? true : false);
 
-        $('#rdenabledsi_usuario').checked = benabled;
-        $('#rdenabledno_usuario').checked = !benabled;
+        if(response.enabled) {
+            console.log("si esta habilitado");
+            $('#rdenabledsi_usuario').prop('checked', true);
+            $('#rdenabledno_usuario').prop('checked', false);
+        }
+        else {
+            console.log("no esta habilitado");
+            $('#rdenabledsi_usuario').prop('checked', false);
+            $('#rdenabledno_usuario').prop('checked', true);
+        }
     });
 }
 
