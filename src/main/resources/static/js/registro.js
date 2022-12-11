@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    $("#freg_numdoc").change(function() {
+        $("#freg_usuario").val($("#freg_numdoc").val());
+    });
+
     $("#btn_guardar_registro").click(function () {
         guardar();
     });

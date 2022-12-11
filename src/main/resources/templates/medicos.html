@@ -69,7 +69,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 control-label">Código</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="txtcodigo" id="txtcodigo" placeholder="Código" readonly="">
+                                    <input type="hidden" class="form-control" name="txtcodigo" id="txtcodigo" placeholder="Código" readonly="">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -128,7 +128,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 control-label">Especialidad</label>
                                 <div class="col-sm-9">
-                                    <select class="custom-select" name="cboespecialidad" id="cboespecialidad">
+                                    <select class="form-select" name="cboespecialidad" id="cboespecialidad">
                                         <option th:each="especialidad : ${especialidades}" th:value="${especialidad.id}" th:text="${especialidad.descripcion}"></option>
                                     </select>
                                 </div>

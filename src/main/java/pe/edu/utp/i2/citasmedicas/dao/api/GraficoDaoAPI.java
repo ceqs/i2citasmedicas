@@ -25,7 +25,7 @@ public interface GraficoDaoAPI extends CrudRepository<Grafico, Integer> {
             " month(fecha_cita) as mes, \n" +
             " count(*) as total,\n" +
             " right(substr('ENEFEBMARABRMAYJUNJULAGOSETOCTNOVDIC',1, month(fecha_cita) * 3),3) as nameM\n" +
-            " from reserva where year(fecha_cita) = :anio group by mes, nameM order by 2",
+            " from reserva where estado = 'ATENDIDO' and year(fecha_cita) = :anio group by mes, nameM order by 2",
             nativeQuery = true)
     List<Grafico> findCountReservasByAnio(@Param("anio") Integer anio);
 
@@ -38,6 +38,7 @@ public interface GraficoDaoAPI extends CrudRepository<Grafico, Integer> {
             "from reserva r\n" +
             "inner join medicos m on r.id_medico=m.id_medico \n" +
             "where year(fecha_cita) = :anio \n" +
+            "and estado = 'ATENDIDO' \n" +
             "group by mes, nameM \n" +
             "order by 3 desc, 4 asc limit 10;",
             nativeQuery = true)

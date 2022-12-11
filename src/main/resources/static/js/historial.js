@@ -52,9 +52,10 @@ function getDataListado(lista) {
         resultado += "<tr>";
         resultado += "    <td>" + lista[i].fechaCita + "</td>";
         resultado += "    <td>" + lista[i].fhInicio + "</td>";
-        resultado += "    <td>" + lista[i].medico.apellidos + "</td>";
+        resultado += "    <td>" + lista[i].medico.nombres + " " +lista[i].medico.apellidos + "</td>";
         resultado += "    <td>" + lista[i].medico.especialidad.descripcion + "</td>";
-        resultado += "    <td>" + lista[i].paciente.apePaterno + "</td>";
+        resultado += "    <td>" + lista[i].paciente.nombres + " " + lista[i].paciente.apePaterno + "</td>";
+        resultado += "    <td>" + lista[i].estado + "</td>";
         resultado += "</tr>";
 
         $("#tblMaestraBody").append(resultado);

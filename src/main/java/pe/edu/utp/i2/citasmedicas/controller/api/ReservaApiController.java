@@ -66,7 +66,7 @@ public class ReservaApiController {
 		Reserva reserva = reservaServiceAPI.get(id);
 		if (reserva != null) {
 			Horario horario = horarioServiceAPI.searchHorarioByFechas(reserva.getMedico().getId(), reserva.getFhInicio(), reserva.getFhFin());
-			horario.setEstado(EstadoCita.DISPONIBLE.toString());
+			horario.setEstado(EstadoCita.LIBERADO.toString());
 			horarioServiceAPI.save(horario);
 			System.out.println(horario);
 			reservaServiceAPI.delete(id);
